@@ -1,158 +1,71 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
-
-margin:0;
-font-family:'Orbitron',sans-serif;
-background:black;
-color:white;
-display:flex;
-
+    background:#0a0f1f;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial,sans-serif;
+    color:white;
 }
 
-/* animated AI background */
-
-.bg{
-
-position:fixed;
-width:100%;
-height:100%;
-background:
-
-radial-gradient(circle at 20% 30%, cyan, transparent),
-radial-gradient(circle at 80% 70%, purple, transparent);
-
-animation:move 8s infinite alternate;
-
-z-index:-1;
-
-}
-
-@keyframes move{
-
-0%{filter:hue-rotate(0deg);}
-100%{filter:hue-rotate(360deg);}
-
-}
-
-/* sidebar */
-
-.sidebar{
-
-width:240px;
-height:100vh;
-background:rgba(0,0,0,0.7);
-backdrop-filter:blur(15px);
-padding:20px;
-
+.hero{
+    text-align:center;
 }
 
 .logo{
-
-color:cyan;
-font-size:24px;
-margin-bottom:30px;
-
+    font-size:100px;
+    margin-bottom:20px;
+    animation:float 2s ease-in-out infinite;
 }
 
-.sidebar button{
-
-width:100%;
-padding:12px;
-margin:10px 0;
-background:transparent;
-border:1px solid cyan;
-color:cyan;
-cursor:pointer;
-transition:0.3s;
-
+h1{
+    font-size:70px;
+    margin-bottom:15px;
+    color:#00e5ff;
+    text-shadow:0 0 20px #00e5ff;
 }
 
-.sidebar button:hover{
-
-background:cyan;
-color:black;
-
+p{
+    font-size:22px;
+    color:#cfcfcf;
+    margin-bottom:30px;
 }
 
-/* main */
-
-.main{
-
-padding:30px;
-flex:1;
-
+button{
+    padding:15px 40px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    background:#00e5ff;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.page{
-
-display:none;
-
+button:hover{
+    transform:scale(1.05);
 }
 
-/* cards */
-
-.card{
-
-background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 20px cyan;
-margin:20px 0;
-
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
 }
 
-/* trust circle */
-
-.circle{
-
-width:150px;
-height:150px;
-border-radius:50%;
-border:6px solid cyan;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-
+.title-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
 }
 
-/* buttons */
-
-.btn{
-
-padding:12px 25px;
-background:cyan;
-border:none;
-color:black;
-cursor:pointer;
-margin-top:10px;
-
-}
-
-/* upload */
-
-.upload{
-
-border:2px dashed cyan;
-padding:30px;
-width:300px;
-
-}
-
-/* progress */
-
-.progress{
-
-width:300px;
-height:20px;
-background:gray;
-margin-top:10px;
-
-}
-
-.bar{
-
-width:0%;
-height:100%;
-background:cyan;
-
+.ai-icon{
+    font-size:60px;
+    color:#00e5ff;
+    text-shadow:0 0 20px #00e5ff;
 }
