@@ -55,3 +55,7 @@ bar.style.width=width+"%";
 },20);
 
 }
+
+setTimeout(() => {
+    window.location.href = "home.html";
+}, 3000);
