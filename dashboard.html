@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <div class="nav-icon">4</div>
+    <div class="nav-icon active">📊</div>
+    <div class="nav-icon">🏠</div>
+    <div class="nav-icon">📄</div>
+    <div class="nav-icon">⚙️</div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="top-bar">
+      <h2>Dashboard Overview</h2>
+      <div class="top-right">
+        <span class="icon">🔔</span>
+        <img src="profile.jpg" alt="Profile" class="profile">
+      </div>
+    </div>
+
+    <!-- 3 Cards Row -->
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-header">
+          <span>Total Analyses</span>
+          <span class="menu">⋮</span>
+        </div>
+        <div class="card-value">1,248</div>
+        <div class="card-change green">↑ +10% this week</div>
+      </div>
+
+      <div class="card center-card">
+        <div class="card-header">
+          <span>Trust Score</span>
+        </div>
+        <div class="circle-progress">
+          <div class="circle-inner">85%</div>
+        </div>
+        <div class="card-label">Trusted</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>Risk Level</span>
+        </div>
+        <div class="risk-status">
+          <span class="dot green"></span> Low Risk
+        </div>
+        <div class="card-sub">No immediate issues found</div>
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>Analysis Summary</h3>
+        <span>This Week ▼</span>
+      </div>
+      <canvas id="lineChart"></canvas>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="activity-card">
+      <div class="activity-header">
+        <h3>Recent Activity</h3>
+        <span class="view-all">View All</span>
+      </div>
+      <div class="activity-item">
+        <div class="avatar">@username</div>
+        <div>
+          <p>Profile Analyzed</p>
+          <small>2m ago</small>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="avatar purple">📹</div>
+        <div>
+          <p>Video.mp4</p>
+          <small>10m ago</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
