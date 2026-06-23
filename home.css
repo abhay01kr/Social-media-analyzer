@@ -4,11 +4,12 @@
     box-sizing:border-box;
     font-family:Arial,sans-serif;
 }
-
 body{
-    background:#050816;
+    background: radial-gradient(circle at top left, #0f172a, #050816);
     color:white;
+    min-height:100vh;
 }
+
 
 nav{
     display:flex;
@@ -139,4 +140,75 @@ ul a{
     color:#00e5ff;
     font-size:24px;
     font-weight:bold;
+}
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:60px;
+    gap:50px;
+}
+
+.left{
+    width:50%;
+}
+
+.right{
+    width:50%;
+}
+
+.dashboard{
+    background:#111827;
+    border-radius:25px;
+    padding:25px;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 0 25px rgba(79,70,229,0.3);
+}
+
+.login-btn,
+.signup-btn{
+    background:linear-gradient(90deg,#4f46e5,#7c3aed);
+    border:none;
+    color:white;
+    padding:12px 20px;
+    border-radius:12px;
+    cursor:pointer;
+}
+.left h1{
+    font-size:70px;
+    line-height:1.1;
+    font-weight:700;
+}
+
+.left h1 span{
+    color:#5b5fff;
+}
+
+.left p{
+    font-size:22px;
+    color:#b8b8b8;
+    margin-top:20px;
+}
+
+.buttons{
+    display:flex;
+    gap:20px;
+    margin-top:30px;
+}
+
+.primary{
+    background:linear-gradient(90deg,#4f46e5,#7c3aed);
+    color:white;
+    border:none;
+    padding:15px 35px;
+    border-radius:15px;
+}
+
+.secondary{
+    background:transparent;
+    border:2px solid #4f46e5;
+    color:white;
+    padding:15px 35px;
+    border-radius:15px;
 }
