@@ -14,13 +14,31 @@
             <input type="password" placeholder="Password" name="password" required><br><br>
             <input type="password" placeholder="Confirm Password" name="confirm_password" required><br><br>
 
-            <button onclick="window.location.href='login.html'">
-              Create Account
-            </button>
+            <button onclick="showSuccess()">
+    Create Account
+</button>
 
-            <p>Already have an account?
-                <a href="login.html">Login</a>
-            </p>
-        </div>
-    </div>
+<p id="successMsg" style="display:none; color:lime; font-size:20px; margin-top:15px;">
+    ✅ Account Created Successfully!
+</p>
+
+<p>
+    Already have an account?
+    <a href="login.html">Login</a>
+</p>
+
+</div>
+</div>
+
+<script>
+function showSuccess() {
+    document.getElementById("successMsg").style.display = "block";
+
+    setTimeout(function () {
+        window.location.href = "login.html";
+    }, 2000);
+}
+</script>
+
 </body>
+</html>
