@@ -68,27 +68,20 @@
     </div>
 
     <!-- Recent Activity -->
-    <div class="activity-card">
-      <div class="activity-header">
-        <h3>Recent Activity</h3>
-        <span class="view-all">View All</span>
-      </div>
-      <div class="activity-item">
-        <div class="avatar">@username</div>
-        <div>
-          <p>Profile Analyzed</p>
-          <small>2m ago</small>
-        </div>
-      </div>
-      <div class="activity-item">
-        <div class="avatar purple">📹</div>
-        <div>
-          <p>Video.mp4</p>
-          <small>10m ago</small>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="action-buttons" style="display:flex; gap:20px; margin-top:30px; justify-content:center;">
+  
+  <button onclick="window.location.href='analyze-profile.html'" 
+    style="padding:25px 50px; font-size:20px; background:#4F46E5; color:white; border:none; border-radius:12px; cursor:pointer;">
+    📊 Analyze Profile
+  </button>
+
+  <button onclick="window.location.href='analyze-video.html'" 
+    style="padding:25px 50px; font-size:20px; background:#10B981; color:white; border:none; border-radius:12px; cursor:pointer;">
+    🎥 Analyze Video
+  </button>
+
+</div>
+  <div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const ctx = document.getElementById('analysisChart').getContext('2d');
