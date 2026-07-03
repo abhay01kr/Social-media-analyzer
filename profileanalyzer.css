@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: #f5f7fb;
+    font-family: Arial, Helvetica, sans-serif;
+
+    display: block;
+    /* IMPORTANT */
+}
+
+
+
+
+.profile-page {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 20px;
+    margin: 0;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    margin-bottom: 25px;
+    color: #6b7280;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin: 20px 0;
+}
+
+.platforms {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.platform {
+    width: 120px;
+    height: 100px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.platform i {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.analysis-list {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.analysis-list li {
+    margin-bottom: 12px;
+}
+
+.analyze-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+html,
+body {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.profile-page {
+    width: 100vw !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+}
