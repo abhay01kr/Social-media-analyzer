@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link rel="stylesheet" href="dashboard.css">
 </head>
+
 <body>
   <!-- Left Sidebar -->
   <div class="sidebar">
     <div class="nav-icon">4</div>
     <div class="nav-icon active">📊</div>
-    <div class="nav-icon">🏠</div>
-    <div class="nav-icon">📄</div>
+    <div class="nav-icon" onclick="window.location.href='home.html'">🏠</div>
+    <div class="nav-icon" onclick="window.location.href='analyzer.html'">📄</div>
     <div class="nav-icon">⚙️</div>
   </div>
 
@@ -68,65 +70,66 @@
     </div>
 
     <!-- Recent Activity -->
-  <div class="action-buttons" style="display:flex; gap:20px; margin-top:30px; justify-content:center;">
-  
-  <button onclick="window.location.href='analyze-profile.html'" 
-    style="padding:25px 50px; font-size:20px; background:#4F46E5; color:white; border:none; border-radius:12px; cursor:pointer;">
-    📊 Analyze Profile
-  </button>
+    <div class="action-buttons" style="display:flex; gap:20px; margin-top:30px; justify-content:center;">
 
-  <button onclick="window.location.href='analyze-video.html'" 
-    style="padding:25px 50px; font-size:20px; background:#10B981; color:white; border:none; border-radius:12px; cursor:pointer;">
-    🎥 Analyze Video
-  </button>
+      <button onclick="window.location.href='profileanalyzer.html'"
+        style="padding:25px 50px; font-size:20px; background:#4F46E5; color:white; border:none; border-radius:12px; cursor:pointer;">
+        📊 Analyze Profile </button>
 
-</div>
-  <div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-const ctx = document.getElementById('analysisChart').getContext('2d');
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    datasets: [{
-      label: '',
-      data: [20, 35, 28, 55, 70, 85, 95],
-      borderColor: '#22C55E',
-      backgroundColor: 'rgba(34, 197, 94, 0.15)',
-      borderWidth: 2.5,
-      tension: 0.5,
-      fill: true,
-      pointRadius: 0,
-      pointHoverRadius: 5
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: {
-        border: { display: false },
-        ticks: { color: '#94A3B8', font: { size: 12 } },
-        grid: { display: false }
-      },
-      y: {
-        border: { display: false },
-        ticks: { color: '#94A3B8', font: { size: 12 } },
-        grid: { color: 'rgba(148, 163, 184, 0.1)', drawBorder: false }
-      }
-    }
-  }
-});
-</script>
 
-<style>
-#analysisChart {
-  height: 180px !important;
-  width: 100% !important;
-}
-</style>
-  <script src="dashboard.js"></script>
+      <button onclick="window.location.href='analyze-video.html'" style="padding:25px 50px; font-size:20px; background:#10B981; color:white; border:none; border-radius:12px;
+        cursor:pointer;">
+        🎥 Analyze Video
+      </button>
+
+    </div>
+    <div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        const ctx = document.getElementById('analysisChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+              label: '',
+              data: [20, 35, 28, 55, 70, 85, 95],
+              borderColor: '#22C55E',
+              backgroundColor: 'rgba(34, 197, 94, 0.15)',
+              borderWidth: 2.5,
+              tension: 0.5,
+              fill: true,
+              pointRadius: 0,
+              pointHoverRadius: 5
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: {
+                border: { display: false },
+                ticks: { color: '#94A3B8', font: { size: 12 } },
+                grid: { display: false }
+              },
+              y: {
+                border: { display: false },
+                ticks: { color: '#94A3B8', font: { size: 12 } },
+                grid: { color: 'rgba(148, 163, 184, 0.1)', drawBorder: false }
+              }
+            }
+          }
+        });
+      </script>
+
+      <style>
+        #analysisChart {
+          height: 180px !important;
+          width: 100% !important;
+        }
+      </style>
+      <script src="dashboard.js"></script>
 </body>
+
 </html>
