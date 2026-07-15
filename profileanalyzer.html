@@ -69,8 +69,50 @@
             <li><i class="fa-solid fa-check"></i> AI Generated Content</li>
         </ul>
 
+        <button class="analyze-btn" onclick="handleAnalysis()">
+            Analyze Profile
+        </button>
 
     </div>
+
+    <script>
+        // Handle platform selection
+        const platforms = document.querySelectorAll('.platform');
+        platforms.forEach(platform => {
+            platform.addEventListener('click', () => {
+                platforms.forEach(p => p.classList.remove('selected'));
+                platform.classList.add('selected');
+            });
+        });
+
+        // Validate fields before proceeding to analysis results
+        function handleAnalysis() {
+            const urlInput = document.getElementById('url');
+            const selectedPlatform = document.querySelector('.platform.selected');
+
+            if (!urlInput.value.trim()) {
+                urlInput.style.borderColor = '#ef4444';
+                urlInput.placeholder = 'Please enter a valid URL';
+                urlInput.focus();
+                return;
+            }
+
+            urlInput.style.borderColor = '#d1d5db'; // Reset color if filled
+
+            if (!selectedPlatform) {
+                alert('Please select a platform to proceed.');
+                return;
+            }
+
+            // Redirect to results page
+            window.location.href = 'analyze-profile.html';
+        }
+
+        // Reset input border color when user types
+        document.getElementById('url').addEventListener('input', function() {
+            this.style.borderColor = '#d1d5db';
+        });
+    </script>
 
 </body>
 
