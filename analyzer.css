@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #4f46e5;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #4338ca;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #64748b;
+    font-size: 16px;
+}
+
+/* Card layout */
+.analysis-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+.analysis-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.08);
+    border-color: rgba(79, 70, 229, 0.2);
+}
+
+.card-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-circle {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #e0e7ff;
+    color: #4f46e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* For video card, use green theme style */
+.analysis-card:nth-of-type(2):hover {
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.analysis-card:nth-of-type(2) .icon-circle {
+    background: #d1fae5;
+    color: #10b981;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.card-arrow {
+    color: #cbd5e1;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+}
+
+.analysis-card:hover .card-arrow {
+    transform: translateX(4px);
+    color: #4f46e5;
+}
+
+.analysis-card:nth-of-type(2):hover .card-arrow {
+    color: #10b981;
+}
+
+/* Recent section */
+.recent-section {
+    margin-top: 40px;
+}
+
+.recent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.recent-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.recent-header a {
+    font-size: 14px;
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.recent-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.recent-icon {
+    font-size: 16px;
+    color: #64748b;
+}
+
+.recent-info {
+    flex: 1;
+}
+
+.recent-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.recent-info p {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.recent-card span {
+    font-size: 12px;
+    color: #94a3b8;
+}

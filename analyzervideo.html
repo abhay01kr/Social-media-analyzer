@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Video</title>
+
+    <link rel="stylesheet" href="analyzevideo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="dashboard.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="card">
+
+            <h1>Analyze Video</h1>
+            <p class="subtitle">
+                Upload a video to check authenticity and detect deepfakes
+            </p>
+
+            <!-- Upload Area -->
+            <div class="upload-box" onclick="document.getElementById('videoInput').click()">
+
+                <input type="file" id="videoInput" accept="video/*" hidden>
+
+                <div class="upload-content">
+
+                    <i class="fas fa-cloud-upload-alt"></i>
+
+                    <h3>Drag & Drop your video here</h3>
+
+                    <p>or Click to Browse</p>
+
+                    <span>
+                        Supports MP4, MOV, AVI (Max 500MB)
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- Video Preview -->
+            <div class="preview-section" id="previewSection">
+
+                <h3>Video Preview</h3>
+
+                <video id="videoPreview" controls>
+                </video>
+
+            </div>
+
+            <!-- Analysis Features -->
+            <div class="features">
+
+                <h3>What We Analyze</h3>
+
+                <div class="feature-grid">
+
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Deepfake Detection</span>
+                    </div>
+
+                    <div class="feature">
+                        <i class="fas fa-film"></i>
+                        <span>Frame Analysis</span>
+                    </div>
+
+                    <div class="feature">
+                        <i class="fas fa-database"></i>
+                        <span>Metadata Inspection</span>
+                    </div>
+
+                    <div class="feature">
+                        <i class="fas fa-volume-up"></i>
+                        <span>Audio Consistency</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="analyze-btn">
+                Analyze Video
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const videoInput = document.getElementById("videoInput");
+        const videoPreview = document.getElementById("videoPreview");
+        const previewSection = document.getElementById("previewSection");
+        const analyzeBtn = document.querySelector(".analyze-btn");
+
+        videoInput.addEventListener("change", function () {
+
+            const file = this.files[0];
+
+            if (file) {
+
+                const url = URL.createObjectURL(file);
+
+                videoPreview.src = url;
+
+                previewSection.style.display = "block";
+            }
+        });
+
+        analyzeBtn.addEventListener("click", function() {
+            if (!videoInput.files || videoInput.files.length === 0) {
+                alert("Please select or upload a video file to proceed.");
+                return;
+            }
+            window.location.href = "analyze-video.html";
+        });
+
+    </script>
+
+</body>
+
+</html>
