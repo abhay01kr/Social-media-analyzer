@@ -1,67 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Notifications - Alerts</title>
+  <meta charset="UTF-8">
+  <title>Scheduled Monitoring Dashboard</title>
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-  <!-- Left Sidebar - wahi copy kar lo dashboard se -->
+  <!-- LEFT SIDEBAR -->
   <div class="sidebar">
-    <div class="nav-icon" onclick="window.location.href='dashboard.html'">4</div>
-    <div class="nav-icon" onclick="window.location.href='home.html'">□</div>
-    <div class="nav-icon" onclick="window.location.href='analyzer.html'">📄</div>
-    <div class="nav-icon" onclick="window.location.href='settings.html'">⚙️</div>
-    <div class="nav-icon active">🔔</div> <!-- yahan active kar do -->
+    <div class="logo">14</div>
+    <div class="nav-item active">🏠</div>
+    <div class="nav-item">👤</div>
+    <div class="nav-item">📊</div>
+    <div class="nav-item">☁️</div>
+    <div class="nav-item">⚙️</div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <div class="top-bar">
-      <h2>Scheduled Monitoring Dashboard</h2>
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <div class="header">
+      <h1>Scheduled Monitoring Dashboard</h1>
+      <div class="header-right">
+        <span>🔔</span>
+        <img src="profile.jpg" class="profile-pic" alt="profile">
+      </div>
     </div>
 
     <div class="tabs">
-      <button>Control</button>
-      <button class="active">Alerts</button>
-      <button class="btn-primary">+ Create Monitor</button>
+      <button class="tab">Control</button>
+      <button class="tab active">Alerts</button>
+      <button class="btn-create">+ Create Monitor</button>
     </div>
 
+    <!-- CARD 1 -->
     <div class="card">
-      <h3>Profile Checks <span class="view-all">View all</span></h3>
-      <div class="check-item">
-        <span class="icon">E</span>
-        <div>
-          <p><b>Profile Data Check</b></p>
-          <small>Profile Analysis</small>
+      <div class="card-top">
+        <h2>Profile Checks</h2>
+        <a href="#">View all</a>
+      </div>
+      <div class="check-row">
+        <div class="icon-box">E</div>
+        <div class="check-info">
+          <h3>Profile Data Check</h3>
+          <p>Profile Analyze</p>
         </div>
-        <span class="status new">New</span>
-        <span class="status configured">Configured</span>
+        <span class="status ok">● Yes</span>
+        <span class="status config">Configured</span>
+        <span>...</span>
       </div>
     </div>
 
+    <!-- CARD 2 -->
     <div class="card">
-      <h3>Video Video Checks <span class="view-all">View all</span></h3>
-      <div class="check-item">
-        <span class="icon">E</span>
-        <div>
-          <p><b>Profile Data Check</b></p>
-          <small>Profile Checks</small>
-        </div>
-        <span class="status new">New</span>
-        <span class="status configured">Configured</span>
+      <div class="card-top">
+        <h2>Video Video Checks</h2>
+        <a href="#">View all</a>
       </div>
-      <div class="check-item">
-        <span class="icon">E</span>
-        <div>
-          <p><b>Video Video Check</b></p>
-          <small>Video Checks</small>
+      <div class="check-row">
+        <div class="icon-box">E</div>
+        <div class="check-info">
+          <h3>Profile Data Check</h3>
+          <p>Profile Checks</p>
         </div>
-        <span class="status new">New</span>
-        <span class="status configured">Configured</span>
+        <span class="status ok">● Yes</span>
+        <span class="status config">Configured</span>
+        <span>...</span>
       </div>
-    </div>
-
-  </div>
-</body>
-</html>
+      <div class="check-row">
+        <div class="icon-box">E</div>
+        <div class="check-info">
+          <h3>Video Video Check</h3>
+          <p>Video Checks</p>
+        </div>
+        <span class="status ok">● Yes</span>
+        <span class="status config">Configured</span>
+        <span>...</span>
+      </div>
