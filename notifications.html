@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notifications - Alerts</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <!-- Left Sidebar - wahi copy kar lo dashboard se -->
+  <div class="sidebar">
+    <div class="nav-icon" onclick="window.location.href='dashboard.html'">4</div>
+    <div class="nav-icon" onclick="window.location.href='home.html'">□</div>
+    <div class="nav-icon" onclick="window.location.href='analyzer.html'">📄</div>
+    <div class="nav-icon" onclick="window.location.href='settings.html'">⚙️</div>
+    <div class="nav-icon active">🔔</div> <!-- yahan active kar do -->
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="top-bar">
+      <h2>Scheduled Monitoring Dashboard</h2>
+    </div>
+
+    <div class="tabs">
+      <button>Control</button>
+      <button class="active">Alerts</button>
+      <button class="btn-primary">+ Create Monitor</button>
+    </div>
+
+    <div class="card">
+      <h3>Profile Checks <span class="view-all">View all</span></h3>
+      <div class="check-item">
+        <span class="icon">E</span>
+        <div>
+          <p><b>Profile Data Check</b></p>
+          <small>Profile Analysis</small>
+        </div>
+        <span class="status new">New</span>
+        <span class="status configured">Configured</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Video Video Checks <span class="view-all">View all</span></h3>
+      <div class="check-item">
+        <span class="icon">E</span>
+        <div>
+          <p><b>Profile Data Check</b></p>
+          <small>Profile Checks</small>
+        </div>
+        <span class="status new">New</span>
+        <span class="status configured">Configured</span>
+      </div>
+      <div class="check-item">
+        <span class="icon">E</span>
+        <div>
+          <p><b>Video Video Check</b></p>
+          <small>Video Checks</small>
+        </div>
+        <span class="status new">New</span>
+        <span class="status configured">Configured</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
