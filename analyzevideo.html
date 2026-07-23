@@ -1,131 +1,187 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analyze Video</title>
-
-    <link rel="stylesheet" href="analyzevideo.css">
+    <title>Video Analysis Results - Social Media Analyzer</title>
+    <link rel="stylesheet" href="analyze-video.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-    <div class="container">
+    <!-- 1.5 Second simulated AI Scan overlay -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="scanner">
+            <i class="fas fa-brain scanner-icon"></i>
+        </div>
+        <h2>Analyzing Video...</h2>
+        <p>Inspecting audio consistency, facial meshes, and compression metadata</p>
+    </div>
 
-        <a href="dashboard.html" class="back-link">
-            <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+    <!-- Main Container -->
+    <div class="container" style="display: none;" id="mainContainer">
+        
+        <a href="analyzevideo.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Upload
         </a>
 
-        <div class="card">
-
-            <h1>Analyze Video</h1>
-            <p class="subtitle">
-                Upload a video to check authenticity and detect deepfakes
-            </p>
-
-            <!-- Upload Area -->
-            <div class="upload-box" onclick="document.getElementById('videoInput').click()">
-
-                <input type="file" id="videoInput" accept="video/*" hidden>
-
-                <div class="upload-content">
-
-                    <i class="fas fa-cloud-upload-alt"></i>
-
-                    <h3>Drag & Drop your video here</h3>
-
-                    <p>or Click to Browse</p>
-
-                    <span>
-                        Supports MP4, MOV, AVI (Max 500MB)
-                    </span>
-
+        <!-- Report Card -->
+        <div class="report-card">
+            
+            <!-- Top Split Layout: Video Player + Status Box -->
+            <div class="top-split">
+                <div>
+                    <div class="video-container">
+                        <!-- Video element will play user's uploaded file or fallback -->
+                        <video id="reportVideo" controls autoplay muted loop playsinline></video>
+                    </div>
+                    <div class="video-title-bar" id="videoTitle">video.mp4</div>
                 </div>
 
-            </div>
-
-            <!-- Video Preview -->
-            <div class="preview-section" id="previewSection">
-
-                <h3>Video Preview</h3>
-
-                <video id="videoPreview" controls>
-                </video>
-
-            </div>
-
-            <!-- Analysis Features -->
-            <div class="features">
-
-                <h3>What We Analyze</h3>
-
-                <div class="feature-grid">
-
-                    <div class="feature">
+                <div class="status-box">
+                    <div class="status-badge">
                         <i class="fas fa-shield-alt"></i>
-                        <span>Deepfake Detection</span>
+                        <span>Authentic</span>
                     </div>
-
-                    <div class="feature">
-                        <i class="fas fa-film"></i>
-                        <span>Frame Analysis</span>
+                    <div class="status-text">
+                        This video is truly real. No deepfake manipulation detected.
                     </div>
-
-                    <div class="feature">
-                        <i class="fas fa-database"></i>
-                        <span>Metadata Inspection</span>
-                    </div>
-
-                    <div class="feature">
-                        <i class="fas fa-volume-up"></i>
-                        <span>Audio Consistency</span>
-                    </div>
-
                 </div>
-
             </div>
 
-            <button class="analyze-btn">
-                Analyze Video
-            </button>
+            <!-- Metrics Row (Authenticity, Deepfake, Manipulation) -->
+            <div class="metrics-row">
+                <div class="metric-card">
+                    <div class="metric-label">Authenticity Score</div>
+                    <div class="metric-value success">92%</div>
+                    <div class="metric-sub success">Very High</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Deepfake Probability</div>
+                    <div class="metric-value success">8%</div>
+                    <div class="metric-sub success">Very Low</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Manipulation</div>
+                    <div class="status-dot-wrapper">
+                        <span class="status-dot"></span>
+                        <span>Not Detected</span>
+                    </div>
+                    <div class="metric-sub success" style="margin-top: 4px;">Clean</div>
+                </div>
+            </div>
+
+            <!-- Analysis Details Checklist -->
+            <div class="details-section">
+                <h3 class="section-title">Analysis Details</h3>
+                <div class="details-grid">
+                    <div class="details-item">
+                        <div class="details-left">
+                            <i class="fas fa-eye"></i>
+                            <span>Visual Consistency</span>
+                        </div>
+                        <div class="details-right status-ok">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Good</span>
+                        </div>
+                    </div>
+
+                    <div class="details-item">
+                        <div class="details-left">
+                            <i class="fas fa-volume-up"></i>
+                            <span>Audio Consistency</span>
+                        </div>
+                        <div class="details-right status-ok">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Good</span>
+                        </div>
+                    </div>
+
+                    <div class="details-item">
+                        <div class="details-left">
+                            <i class="fas fa-database"></i>
+                            <span>Assets Consistency</span>
+                        </div>
+                        <div class="details-right status-ok">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No Issues</span>
+                        </div>
+                    </div>
+
+                    <div class="details-item">
+                        <div class="details-left">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <span>Compression Analysis</span>
+                        </div>
+                        <div class="details-right status-ok">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No Issues</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Recommendation Box -->
+            <div class="recommendation-box">
+                <i class="fas fa-lightbulb"></i>
+                <div class="recommendation-content">
+                    <h4>AI Recommendation</h4>
+                    <p>No signs of manipulation detected. The video looks authentic.</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions-row">
+                <a href="analyzevideo.html" class="btn btn-primary">Analyze Another Video</a>
+                <a href="dashboard.html" class="btn btn-secondary">Return to Dashboard</a>
+            </div>
 
         </div>
 
     </div>
 
+    <!-- Script to dynamically handle video loading and loader overlay -->
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reportVideo = document.getElementById("reportVideo");
+            const videoTitle = document.getElementById("videoTitle");
 
-        const videoInput = document.getElementById("videoInput");
-        const videoPreview = document.getElementById("videoPreview");
-        const previewSection = document.getElementById("previewSection");
-        const analyzeBtn = document.querySelector(".analyze-btn");
+            // Retrieve video blob/file URL and metadata from sessionStorage
+            const storedVideoUrl = sessionStorage.getItem("uploadedVideoUrl");
+            const storedVideoName = sessionStorage.getItem("uploadedVideoName");
 
-        videoInput.addEventListener("change", function () {
-
-            const file = this.files[0];
-
-            if (file) {
-
-                const url = URL.createObjectURL(file);
-
-                videoPreview.src = url;
-
-                previewSection.style.display = "block";
+            if (storedVideoUrl) {
+                reportVideo.src = storedVideoUrl;
+                videoTitle.textContent = storedVideoName || "uploaded-video.mp4";
+            } else {
+                // Fallback video URL if accessed directly
+                reportVideo.src = "https://assets.mixkit.co/videos/preview/mixkit-man-holding-smartphone-in-his-hand-40546-large.mp4";
+                videoTitle.textContent = "sample-clip.mp4 (No upload found)";
             }
-        });
 
-        analyzeBtn.addEventListener("click", function() {
-            if (!videoInput.files || videoInput.files.length === 0) {
-                alert("Please select or upload a video file to proceed.");
-                return;
-            }
-            window.location.href = "analyze-video.html";
+            // Simulated scanning loading sequence: 1.5 seconds
+            setTimeout(() => {
+                const overlay = document.getElementById('loaderOverlay');
+                const container = document.getElementById('mainContainer');
+                
+                overlay.style.opacity = 0;
+                overlay.style.visibility = 'hidden';
+                
+                container.style.display = 'block';
+                
+                // Play the video once scanning screen is cleared
+                reportVideo.play().catch(e => {
+                    console.log("Autoplay blocked, waiting for user interaction.", e);
+                });
+            }, 1500);
         });
-
     </script>
-
 </body>
-
 </html>
+
+
+       
