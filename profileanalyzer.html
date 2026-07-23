@@ -104,8 +104,9 @@
                 return;
             }
 
-            // Redirect to results page
-            window.location.href = 'analyze-profile.html';
+            // Redirect to results page with query parameters
+            const platformName = selectedPlatform.querySelector('span').textContent;
+            window.location.href = `analyze-profile.html?url=${encodeURIComponent(urlInput.value.trim())}&platform=${encodeURIComponent(platformName)}`;
         }
 
         // Reset input border color when user types
