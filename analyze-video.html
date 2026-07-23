@@ -1,221 +1,143 @@
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Analysis Results</title>
+    <title>Analyze Video</title>
+
+    <link rel="stylesheet" href="analyzevideo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', Arial, sans-serif;
-        }
-
-        body {
-            background: #f5f7fb;
-            color: #1e293b;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-
-        .back-link {
-            text-decoration: none;
-            color: #10b981;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 25px;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-
-        .back-link:hover {
-            color: #059669;
-        }
-
-        .success-icon {
-            font-size: 64px;
-            color: #10b981;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: #1e293b;
-        }
-
-        .subtitle {
-            color: #64748b;
-            margin-bottom: 30px;
-        }
-
-        .score-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: conic-gradient(#10b981 0deg 331deg, #e2e8f0 331deg 360deg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px auto;
-            position: relative;
-        }
-
-        .score-inner {
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .score-num {
-            font-size: 36px;
-            font-weight: 700;
-            color: #10b981;
-        }
-
-        .score-label {
-            font-size: 12px;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
-
-        .results-details {
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
-        }
-
-        .result-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-            color: #475569;
-        }
-
-        .result-label i {
-            color: #10b981;
-        }
-
-        .result-value {
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .btn {
-            display: inline-block;
-            width: 100%;
-            padding: 14px;
-            background: #10b981;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.1);
-            text-align: center;
-        }
-
-        .btn:hover {
-            background: #059669;
-            transform: translateY(-1px);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-    </style>
 </head>
+
 <body>
+
     <div class="container">
-        <a href="analyzevideo.html" class="back-link">
-            <i class="fa-solid fa-arrow-left"></i> Back to Upload
+
+        <a href="dashboard.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
         </a>
+
         <div class="card">
-            <i class="fas fa-check-circle success-icon"></i>
-            <h1>Analysis Complete</h1>
-            <p class="subtitle">Your video has been analyzed using our AI detection engine</p>
-            
-            <div class="score-circle">
-                <div class="score-inner">
-                    <span class="score-num">92%</span>
-                    <span class="score-label">Authentic</span>
+
+            <h1>Analyze Video</h1>
+            <p class="subtitle">
+                Upload a video to check authenticity and detect deepfakes
+            </p>
+
+            <!-- Upload Area -->
+            <div class="upload-box" onclick="document.getElementById('videoInput').click()">
+
+                <input type="file" id="videoInput" accept="video/*" hidden>
+
+                <div class="upload-content">
+
+                    <i class="fas fa-cloud-upload-alt"></i>
+
+                    <h3>Drag & Drop your video here</h3>
+
+                    <p>or Click to Browse</p>
+
+                    <span>
+                        Supports MP4, MOV, AVI (Max 500MB)
+                    </span>
+
                 </div>
+
             </div>
 
-            <div class="results-details">
-                <div class="result-item">
-                    <div class="result-label">
+            <!-- Video Preview -->
+            <div class="preview-section" id="previewSection">
+
+                <h3>Video Preview</h3>
+
+                <video id="videoPreview" controls>
+                </video>
+
+            </div>
+
+            <!-- Analysis Features -->
+            <div class="features">
+
+                <h3>What We Analyze</h3>
+
+                <div class="feature-grid">
+
+                    <div class="feature">
                         <i class="fas fa-shield-alt"></i>
                         <span>Deepfake Detection</span>
                     </div>
-                    <span class="result-value" style="color: #10b981;">Negative (No manipulation)</span>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">
+
+                    <div class="feature">
                         <i class="fas fa-film"></i>
                         <span>Frame Analysis</span>
                     </div>
-                    <span class="result-value">98.5% Consistency</span>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">
+
+                    <div class="feature">
                         <i class="fas fa-database"></i>
                         <span>Metadata Inspection</span>
                     </div>
-                    <span class="result-value">Valid & Intact</span>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">
+
+                    <div class="feature">
                         <i class="fas fa-volume-up"></i>
                         <span>Audio Consistency</span>
                     </div>
-                    <span class="result-value">Match Found</span>
+
                 </div>
+
             </div>
 
-            <a href="dashboard.html" class="btn">Return to Dashboard</a>
+            <button class="analyze-btn">
+                Analyze Video
+            </button>
+
         </div>
+
     </div>
+
+    <script>
+
+        const videoInput = document.getElementById("videoInput");
+        const videoPreview = document.getElementById("videoPreview");
+        const previewSection = document.getElementById("previewSection");
+        const analyzeBtn = document.querySelector(".analyze-btn");
+
+        videoInput.addEventListener("change", function () {
+
+            const file = this.files[0];
+
+            if (file) {
+
+                const url = URL.createObjectURL(file);
+
+                videoPreview.src = url;
+
+                previewSection.style.display = "block";
+
+                // Save to sessionStorage for page 7B
+                sessionStorage.setItem("uploadedVideoUrl", url);
+                sessionStorage.setItem("uploadedVideoName", file.name);
+            }
+        });
+
+        analyzeBtn.addEventListener("click", function() {
+            if (!videoInput.files || videoInput.files.length === 0) {
+                alert("Please select or upload a video file to proceed.");
+                return;
+            }
+            window.location.href = "analyze-video.html";
+        });
+
+    </script>
+
 </body>
+
 </html>
+    
+
+        
+         
+       
+         
+                   
