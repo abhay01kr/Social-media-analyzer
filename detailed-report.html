@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detailed Analysis Report - Social Media Analyzer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="detailed-report.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo" onclick="window.location.href='home.html'"><i class="fa-solid fa-brain"></i></div>
+      <div class="nav-icon" onclick="window.location.href='dashboard.html'" title="Dashboard"><i class="fa-solid fa-chart-simple"></i></div>
+      <div class="nav-icon" onclick="window.location.href='analyzer.html'" title="Analyzer"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+      <div class="nav-icon" onclick="window.location.href='history.html'" title="History"><i class="fa-solid fa-clock-rotate-left"></i></div>
+      <div class="nav-icon" onclick="window.location.href='notifications.html'" title="Notifications"><i class="fa-solid fa-bell"></i></div>
+      <div class="nav-icon" onclick="window.location.href='settings.html'" title="Settings"><i class="fa-solid fa-gear"></i></div>
+      <div class="nav-icon logout-icon" onclick="window.location.href='logout.html'" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Back Link -->
+      <a href="history.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to History
+      </a>
+
+      <!-- Header Row -->
+      <div class="report-header">
+        <div class="header-left">
+          <h2>Report ID: <span class="report-id">#SMA1248</span></h2>
+          <span class="status-pill authentic">● Authentic</span>
+        </div>
+        <button class="download-btn" onclick="triggerPDFDownload()">
+          <i class="fa-solid fa-file-pdf"></i> Download PDF
+        </button>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="report-tabs">
+        <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+        <button class="tab-btn" onclick="switchTab('visual')">Visual Analysis</button>
+        <button class="tab-btn" onclick="switchTab('metadata')">Metadata</button>
+        <button class="tab-btn" onclick="switchTab('insights')">AI Insights</button>
+      </div>
+
+      <!-- Tab Content: Overview -->
+      <div id="tab-overview" class="tab-content active">
+        <div class="overview-grid">
+          <!-- Overall Result Card -->
+          <div class="report-card overall-result-card">
+            <h3>Overall Result</h3>
+            <div class="circle-progress-wrapper">
+              <svg class="progress-circle" width="160" height="160" viewBox="0 0 160 160">
+                <circle class="bg" cx="80" cy="80" r="70"></circle>
+                <circle class="fg" cx="80" cy="80" r="70" style="stroke-dasharray: 440; stroke-dashoffset: 440;"></circle>
+              </svg>
+              <div class="circle-text">
+                <span class="percentage">92%</span>
+                <span class="label">Authentic</span>
+              </div>
+            </div>
+            <div class="result-message">
+              <h4 class="success-text">Authentic</h4>
+              <p>This content is highly likely to be real. No deepfake manipulation detected.</p>
+            </div>
+          </div>
+
+          <!-- Score Breakdown Card -->
+          <div class="report-card score-breakdown-card">
+            <h3>Score Breakdown</h3>
+            <div class="breakdown-list">
+              <div class="breakdown-item">
+                <div class="breakdown-info">
+                  <span>Visual Consistency</span>
+                  <span class="score-val">95%</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fg" data-width="95%" style="width: 0%;"></div>
+                </div>
+              </div>
+              
+              <div class="breakdown-item">
+                <div class="breakdown-info">
+                  <span>Audio Consistency</span>
+                  <span class="score-val">90%</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fg" data-width="90%" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="breakdown-item">
+                <div class="breakdown-info">
+                  <span>Metadata Check</span>
+                  <span class="score-val">93%</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fg" data-width="93%" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="breakdown-item">
+                <div class="breakdown-info">
+                  <span>Compression Analysis</span>
+                  <span class="score-val">91%</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fg" data-width="91%" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analysis Overview Summary -->
+        <div class="report-card summary-card">
+          <h3>Analysis Overview</h3>
+          <p class="summary-paragraph">
+            Our AI has analyzed this video using multiple advanced deep learning models. The visual analysis checked for micro-expressions, facial mesh alignment anomalies, and lightning gradients. The audio consistency module compared speech patterns and frequency modulations to detect synthesized or modified voices. Metadata inspections found no indicators of software tampering, and compression analyses verified normal distribution of frame coefficients. The results indicate that this video is authentic and there are no signs of deepfake manipulation.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab Content: Visual Analysis -->
+      <div id="tab-visual" class="tab-content">
+        <div class="report-card full-width-card">
+          <h3>Visual Consistency Scan Results</h3>
+          <div class="visual-grid">
+            <div class="visual-metric">
+              <div class="metric-icon"><i class="fa-solid fa-face-smile"></i></div>
+              <div class="metric-desc">
+                <h4>Face Mesh Check</h4>
+                <p>98,240 landmarks verified across 450 frames. Landmark displacements match natural micro-expressions.</p>
+                <span class="badge success">PASS</span>
+              </div>
+            </div>
+            
+            <div class="visual-metric">
+              <div class="metric-icon"><i class="fa-solid fa-lightbulb"></i></div>
+              <div class="metric-desc">
+                <h4>Lighting & Shading Consistency</h4>
+                <p>Light reflections on skin surface match the global environment illumination. No spatial shading inconsistencies.</p>
+                <span class="badge success">PASS</span>
+              </div>
+            </div>
+
+            <div class="visual-metric">
+              <div class="metric-icon"><i class="fa-solid fa-film"></i></div>
+              <div class="metric-desc">
+                <h4>Frame Rate Alignment</h4>
+                <p>Verified uniform intervals between keyframes. No frames added, deleted, or blended during processing.</p>
+                <span class="badge success">PASS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Metadata -->
+      <div id="tab-metadata" class="tab-content">
+        <div class="report-card full-width-card">
+          <h3>File Metadata Inspector</h3>
+          <table class="metadata-table">
+            <thead>
+              <tr>
+                <th>Metadata Property</th>
+                <th>Extracted Value</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>File Name</strong></td>
+                <td>video.mp4</td>
+                <td><span class="badge info">Verified</span></td>
+              </tr>
+              <tr>
+                <td><strong>Mime Type</strong></td>
+                <td>video/mp4</td>
+                <td><span class="badge info">Verified</span></td>
+              </tr>
+              <tr>
+                <td><strong>Duration</strong></td>
+                <td>00:15 seconds</td>
+                <td><span class="badge info">Verified</span></td>
+              </tr>
+              <tr>
+                <td><strong>Codec</strong></td>
+                <td>H.264 / AVC (Advanced Video Coding)</td>
+                <td><span class="badge info">Verified</span></td>
+              </tr>
+              <tr>
+                <td><strong>Resolution</strong></td>
+                <td>1920x1080 (1080p, Full HD)</td>
+                <td><span class="badge info">Verified</span></td>
+              </tr>
+              <tr>
+                <td><strong>Software Signatures</strong></td>
+                <td>Apple QuickTime (Native Camera Capture)</td>
+                <td><span class="badge success">Authentic</span></td>
+              </tr>
+              <tr>
+                <td><strong>Tampering Flags</strong></td>
+                <td>No hex editor traces or third-party encoder signatures.</td>
+                <td><span class="badge success">Clean</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab Content: AI Insights -->
+      <div id="tab-insights" class="tab-content">
+        <div class="report-card full-width-card">
+          <h3>AI Insights & Recommendations</h3>
+          <div class="insights-container">
+            <div class="insight-item">
+              <i class="fa-solid fa-brain insight-icon"></i>
+              <div>
+                <h4>Synthetic Detection Model v3.5</h4>
+                <p>The temporal convolutional network (TCN) evaluated facial blending boundaries. Boundary score shows 98.4% likeness to natural skin fusion.</p>
+              </div>
+            </div>
+            <div class="insight-item">
+              <i class="fa-solid fa-microphone-lines insight-icon"></i>
+              <div>
+                <h4>Acoustic Voice Print Match</h4>
+                <p>Spectral density matches high-fidelity vocal cords. Voice synthesis classifiers scored voice authenticity at 96.1% (well above the 75% threshold).</p>
+              </div>
+            </div>
+            <div class="insight-item">
+              <i class="fa-solid fa-circle-check insight-icon green"></i>
+              <div>
+                <h4>AI Decision Recommendation</h4>
+                <p>No actionable threats found. The content is verified authentic and safe for redistribution/broadcasting.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <div class="toast-body">
+      <strong>PDF Report Ready</strong>
+      <p>Your detailed report download has started.</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check Dark Mode
+      if (localStorage.getItem("pref_dark_mode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+
+      // Animate progress bars and circle on load
+      setTimeout(() => {
+        animateBars();
+        animateCircle(92);
+      }, 300);
+    });
+
+    function animateBars() {
+      const progressBars = document.querySelectorAll('.progress-bar-fg');
+      progressBars.forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = width;
+      });
+    }
+
+    function animateCircle(score) {
+      const circle = document.querySelector('.progress-circle .fg');
+      if (!circle) return;
+      const radius = circle.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius;
+      
+      circle.style.strokeDasharray = circumference;
+      
+      const offset = circumference - (score / 100) * circumference;
+      circle.style.strokeDashoffset = offset;
+    }
+
+    function switchTab(tabId) {
+      // Toggle tab buttons
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Toggle tab content
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+      
+      const activeContent = document.getElementById('tab-' + tabId);
+      activeContent.classList.add('active');
+
+      // Re-trigger animations if overview is selected
+      if (tabId === 'overview') {
+        setTimeout(() => {
+          animateBars();
+          animateCircle(92);
+        }, 50);
+      }
+    }
+
+    function triggerPDFDownload() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      
+      // Simulate pdf print/download trigger
+      setTimeout(() => {
+        toast.classList.remove('show');
+        window.print();
+      }, 2500);
+    }
+  </script>
+
+</body>
+</html>
