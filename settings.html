@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Social Media Analyzer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="settings.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo" onclick="window.location.href='home.html'"><i class="fa-solid fa-brain"></i></div>
+      <div class="nav-icon" onclick="window.location.href='dashboard.html'" title="Dashboard"><i class="fa-solid fa-chart-simple"></i></div>
+      <div class="nav-icon" onclick="window.location.href='analyzer.html'" title="Analyzer"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+      <div class="nav-icon" onclick="window.location.href='history.html'" title="History"><i class="fa-solid fa-clock-rotate-left"></i></div>
+      <div class="nav-icon" onclick="window.location.href='notifications.html'" title="Notifications"><i class="fa-solid fa-bell"></i></div>
+      <div class="nav-icon active" onclick="window.location.href='settings.html'" title="Settings"><i class="fa-solid fa-gear"></i></div>
+      <div class="nav-icon logout-icon" onclick="window.location.href='logout.html'" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h2 class="page-title">Profile Settings</h2>
+
+      <div class="settings-grid">
+        <!-- Left: Profile Settings Form -->
+        <div class="settings-card">
+          <h3>Profile Details</h3>
+          
+          <div class="avatar-section">
+            <div class="avatar-container">
+              <img id="avatar-preview" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80" alt="User Avatar">
+              <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+            </div>
+            <button class="change-photo-btn" onclick="document.getElementById('avatar-input').click()">
+              <i class="fa-solid fa-camera"></i> Change Photo
+            </button>
+          </div>
+
+          <form id="profile-form" onsubmit="event.preventDefault();">
+            <div class="form-group">
+              <label for="full-name">Full Name</label>
+              <input type="text" id="full-name" value="John Doe" placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" value="john.doe@example.com" placeholder="Enter your email address">
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="password-wrapper">
+                <input type="password" id="password" value="••••••••" readonly>
+                <button type="button" class="change-password-link" onclick="promptChangePassword()">Change Password</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Account Settings Toggles -->
+        <div class="settings-card">
+          <h3>Account Settings</h3>
+          
+          <div class="settings-list">
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Notifications</h4>
+                <p>Receive browser notifications for completed analyses.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-notifications" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Email Alerts</h4>
+                <p>Get email reports for weekly activity summaries.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-emails" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Dark Mode</h4>
+                <p>Toggle system interface between light and dark themes.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-dark-mode">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Language</h4>
+                <p>Select your preferred display language.</p>
+              </div>
+              <select id="language-select" class="language-dropdown">
+                <option value="en" selected>English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+              </select>
+            </div>
+
+            <div class="setting-item" style="border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 10px;">
+              <div class="setting-info">
+                <h4>Sign Out</h4>
+                <p>End your session and sign out of your account.</p>
+              </div>
+              <button class="btn-logout" onclick="window.location.href='logout.html'" style="background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger-border); padding: 10px 18px; border-radius: 8px; font-size: 13.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition);">
+                <i class="fa-solid fa-right-from-bracket"></i> Log Out
+              </button>
+            </div>
+          </div>
+
+          <button class="save-settings-btn" onclick="saveSettings()">
+            <i class="fa-solid fa-circle-check"></i> Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <div class="toast-body">
+      <strong>Settings Saved</strong>
+      <p>Your preferences have been updated successfully.</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Load saved preferences
+      loadSavedPreferences();
+
+      // Handle avatar file input change
+      const avatarInput = document.getElementById("avatar-input");
+      const avatarPreview = document.getElementById("avatar-preview");
+      
+      avatarInput.addEventListener("change", function() {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            avatarPreview.src = e.target.result;
+            // Save preview in localStorage for consistency
+            localStorage.setItem("user_avatar_base64", e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Handle Dark Mode toggle
+      const darkModeToggle = document.getElementById("toggle-dark-mode");
+      darkModeToggle.addEventListener("change", function() {
+        if (this.checked) {
+          document.body.classList.add("dark-mode");
+        } else {
+          document.body.classList.remove("dark-mode");
+        }
+      });
+    });
+
+    function loadSavedPreferences() {
+      // Name & Email
+      const savedName = localStorage.getItem("user_full_name") || "John Doe";
+      const savedEmail = localStorage.getItem("user_email") || "john.doe@example.com";
+      document.getElementById("full-name").value = savedName;
+      document.getElementById("email").value = savedEmail;
+
+      // Avatar
+      const savedAvatar = localStorage.getItem("user_avatar_base64");
+      if (savedAvatar) {
+        document.getElementById("avatar-preview").src = savedAvatar;
+      }
+
+      // Toggles
+      const notify = localStorage.getItem("pref_notifications") !== "false";
+      const emails = localStorage.getItem("pref_email_alerts") !== "false";
+      const darkMode = localStorage.getItem("pref_dark_mode") === "true";
+      const lang = localStorage.getItem("pref_language") || "en";
+
+      document.getElementById("toggle-notifications").checked = notify;
+      document.getElementById("toggle-emails").checked = emails;
+      document.getElementById("toggle-dark-mode").checked = darkMode;
+      document.getElementById("language-select").value = lang;
+
+      if (darkMode) {
+        document.body.classList.add("dark-mode");
+      }
+    }
+
+    function saveSettings() {
+      const name = document.getElementById("full-name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const notify = document.getElementById("toggle-notifications").checked;
+      const emails = document.getElementById("toggle-emails").checked;
+      const darkMode = document.getElementById("toggle-dark-mode").checked;
+      const lang = document.getElementById("language-select").value;
+
+      // Save to localStorage
+      localStorage.setItem("user_full_name", name);
+      localStorage.setItem("user_email", email);
+      localStorage.setItem("pref_notifications", notify);
+      localStorage.setItem("pref_email_alerts", emails);
+      localStorage.setItem("pref_dark_mode", darkMode);
+      localStorage.setItem("pref_language", lang);
+
+      // Apply Dark Mode globally
+      if (darkMode) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("dark-mode-applied", "true");
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("dark-mode-applied", "false");
+      }
+
+      // Show success toast
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
+    function promptChangePassword() {
+      const newPassword = prompt("Enter your new password:");
+      if (newPassword && newPassword.trim().length > 0) {
+        alert("Password updated successfully!");
+        document.getElementById("password").value = "••••••••••••";
+      }
+    }
+  </script>
+
+</body>
+</html>
