@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysis History - Social Media Analyzer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="history.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo" onclick="window.location.href='home.html'"><i class="fa-solid fa-brain"></i></div>
+      <div class="nav-icon" onclick="window.location.href='dashboard.html'" title="Dashboard"><i class="fa-solid fa-chart-simple"></i></div>
+      <div class="nav-icon" onclick="window.location.href='analyzer.html'" title="Analyzer"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+      <div class="nav-icon active" onclick="window.location.href='history.html'" title="History"><i class="fa-solid fa-clock-rotate-left"></i></div>
+      <div class="nav-icon" onclick="window.location.href='notifications.html'" title="Notifications"><i class="fa-solid fa-bell"></i></div>
+      <div class="nav-icon" onclick="window.location.href='settings.html'" title="Settings"><i class="fa-solid fa-gear"></i></div>
+      <div class="nav-icon logout-icon" onclick="window.location.href='logout.html'" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="header-container">
+        <h2>Your Analysis History</h2>
+        <button class="clear-history-btn" onclick="clearAllHistory()">
+          <i class="fa-solid fa-trash-can"></i> Clear History
+        </button>
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="filter-pills">
+        <button class="pill active" onclick="filterHistory('all')">All</button>
+        <button class="pill" onclick="filterHistory('profile')">Profiles</button>
+        <button class="pill" onclick="filterHistory('video')">Videos</button>
+      </div>
+
+      <!-- History Table Container -->
+      <div class="table-container">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Target</th>
+              <th>Result</th>
+              <th>Score</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody">
+            <!-- Populated via Javascript -->
+          </tbody>
+        </table>
+        
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state">
+          <i class="fa-solid fa-folder-open empty-icon"></i>
+          <h4>No Analyses Yet</h4>
+          <p>Start by analyzing a social media profile or video file.</p>
+          <button class="btn-primary" onclick="window.location.href='analyzer.html'">Start Analysis</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Initial default mock data
+    const defaultHistory = [
+      { id: "1", type: "profile", target: "@username", platform: "Instagram", result: "Trusted", score: 85, date: "2m ago" },
+      { id: "2", type: "video", target: "video.mp4", platform: null, result: "Authentic", score: 92, date: "10m ago" },
+      { id: "3", type: "profile", target: "@another_user", platform: "Facebook", result: "Low Risk", score: 70, date: "1h ago" },
+      { id: "4", type: "video", target: "video2.mp4", platform: null, result: "Authentic", score: 90, date: "3h ago" },
+      { id: "5", type: "profile", target: "@user_test", platform: "TikTok", result: "High Risk", score: 45, date: "5h ago" }
+    ];
+
+    // Load history from localStorage or set defaults
+    function getHistory() {
+      const stored = localStorage.getItem("sma_analysis_history");
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch(e) {
+          return defaultHistory;
+        }
+      } else {
+        localStorage.setItem("sma_analysis_history", JSON.stringify(defaultHistory));
+        return defaultHistory;
+      }
+    }
+
+    let activeFilter = 'all';
+
+    function renderHistory() {
+      const historyList = getHistory();
+      const tbody = document.getElementById("history-tbody");
+      const emptyState = document.getElementById("empty-state");
+      
+      // Filter list
+      const filtered = historyList.filter(item => {
+        if (activeFilter === 'all') return true;
+        return item.type === activeFilter;
+      });
+
+      tbody.innerHTML = "";
+
+      if (filtered.length === 0) {
+        emptyState.style.display = "flex";
+        document.querySelector(".history-table").style.display = "none";
+        return;
+      } else {
+        emptyState.style.display = "none";
+        document.querySelector(".history-table").style.display = "table";
+      }
+
+      filtered.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.className = "history-row";
+        
+        // Define click handler based on type
+        tr.onclick = () => {
+          if (item.type === 'profile') {
+            const platformParam = item.platform ? `&platform=${encodeURIComponent(item.platform)}` : '';
+            window.location.href = `analyze-profile.html?url=${encodeURIComponent(item.target)}${platformParam}`;
+          } else {
+            // Video reports go to the detailed report page
+            window.location.href = `detailed-report.html?id=${item.id}`;
+          }
+        };
+
+        // Icon column HTML
+        const typeIcon = item.type === 'profile' 
+          ? '<i class="fa-solid fa-user icon-profile"></i> Profile' 
+          : '<i class="fa-solid fa-video icon-video"></i> Video';
+
+        // Result badge class
+        let badgeClass = "badge-neutral";
+        if (item.result === "Trusted" || item.result === "Authentic") {
+          badgeClass = "badge-success";
+        } else if (item.result === "Low Risk") {
+          badgeClass = "badge-warning";
+        } else if (item.result === "High Risk") {
+          badgeClass = "badge-danger";
+        }
+
+        tr.innerHTML = `
+          <td class="type-cell">${typeIcon}</td>
+          <td class="target-cell">${escapeHTML(item.target)}</td>
+          <td><span class="result-badge ${badgeClass}">${item.result}</span></td>
+          <td class="score-cell">${item.score}%</td>
+          <td class="date-cell">${item.date}</td>
+        `;
+        
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterHistory(filterType) {
+      activeFilter = filterType;
+      
+      // Update active pill styling
+      const pills = document.querySelectorAll(".pill");
+      pills.forEach(pill => pill.classList.remove("active"));
+      event.target.classList.add("active");
+      
+      renderHistory();
+    }
+
+    function clearAllHistory() {
+      if (confirm("Are you sure you want to clear your analysis history?")) {
+        localStorage.setItem("sma_analysis_history", JSON.stringify([]));
+        renderHistory();
+      }
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+
+    // Render on load
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check Dark Mode
+      if (localStorage.getItem("pref_dark_mode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+
+      renderHistory();
+      
+      // Dynamic listener: check if an analysis was just run in this session
+      // If we analyzed a profile or video, we could push it into getHistory
+      const newProfile = sessionStorage.getItem("last_analyzed_profile");
+      if (newProfile) {
+        try {
+          const parsed = JSON.parse(newProfile);
+          const currentList = getHistory();
+          // Check if already in history to avoid duplication
+          if (!currentList.some(item => item.target === parsed.target && item.date === "Just now")) {
+            currentList.unshift({
+              id: Date.now().toString(),
+              type: "profile",
+              target: parsed.target,
+              platform: parsed.platform,
+              result: "Trusted",
+              score: 85,
+              date: "Just now"
+            });
+            localStorage.setItem("sma_analysis_history", JSON.stringify(currentList));
+            sessionStorage.removeItem("last_analyzed_profile");
+            renderHistory();
+          }
+        } catch(e) {}
+      }
+    });
+  </script>
+
+</body>
+</html>
