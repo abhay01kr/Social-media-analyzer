@@ -6,27 +6,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="sidebar.css">
   <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
   <!-- Left Sidebar -->
   <div class="sidebar">
-    <div class="nav-icon">4</div>
-    <div class="nav-icon active">📊</div>
-    <div class="nav-icon" onclick="window.location.href='home.html'">🏠</div>
-    <div class="nav-icon" onclick="window.location.href='analyzer.html'">📄</div>
-    <div class="nav-icon">⚙️</div>
-    <div class="nav-icon" onclick="window.location.href='notifications.html'" title="Notification">🔔</div>
+    <div class="logo" onclick="window.location.href='home.html'"><i class="fa-solid fa-brain"></i></div>
+    <div class="nav-icon active" onclick="window.location.href='dashboard.html'" title="Dashboard"><i class="fa-solid fa-chart-simple"></i></div>
+    <div class="nav-icon" onclick="window.location.href='analyzer.html'" title="Analyzer"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+    <div class="nav-icon" onclick="window.location.href='history.html'" title="History"><i class="fa-solid fa-clock-rotate-left"></i></div>
+    <div class="nav-icon" onclick="window.location.href='notifications.html'" title="Notifications"><i class="fa-solid fa-bell"></i></div>
+    <div class="nav-icon" onclick="window.location.href='settings.html'" title="Settings"><i class="fa-solid fa-gear"></i></div>
+    <div class="nav-icon logout-icon" onclick="window.location.href='logout.html'" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></div>
   </div>
 
   <!-- Main Content -->
   <div class="main-content">
     <div class="top-bar">
       <h2>Dashboard Overview</h2>
-      <div class="top-right">
-        <span class="icon">🔔</span>
-        <img src="profile.jpg" alt="Profile" class="profile">
+      <div class="top-right" style="display: flex; align-items: center; gap: 15px;">
+        <span class="icon" onclick="window.location.href='notifications.html'" style="cursor: pointer; font-size: 20px; color: #64748b;"><i class="fa-regular fa-bell"></i></span>
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&auto=format&fit=crop&q=80" alt="Profile" class="profile" onclick="window.location.href='settings.html'" style="cursor: pointer;">
       </div>
     </div>
 
@@ -131,11 +134,10 @@
           width: 100% !important;
         }
       </style>
-      <script src="dashboard.js"></script>
-
-
-      </a>
+      <script>
+        if (localStorage.getItem("pref_dark_mode") === "true") {
+          document.body.classList.add("dark-mode");
+        }
+      </script>
 </body>
-
-</html>
-
+</html>               
