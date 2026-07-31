@@ -125,7 +125,7 @@
         tr.onclick = () => {
           if (item.type === 'profile') {
             const platformParam = item.platform ? `&platform=${encodeURIComponent(item.platform)}` : '';
-            window.location.href = `analyze-profile.html?url=${encodeURIComponent(item.target)}${platformParam}`;
+            window.location.href = `profile-detailed-report.html?url=${encodeURIComponent(item.target)}${platformParam}&from=history`;
           } else {
             // Video reports go to the detailed report page
             window.location.href = `detailed-report.html?id=${item.id}`;
