@@ -220,12 +220,34 @@ body {
     padding: 10px 16px;
     border-radius: 12px;
     color: #065f46;
+    transition: var(--transition);
+}
+
+.status-box.warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+    color: #92400e;
+}
+
+.status-box.danger {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #991b1b;
 }
 
 .status-box i {
     font-size: 18px;
     color: var(--success);
 }
+
+.status-box.warning i {
+    color: var(--warning);
+}
+
+.status-box.danger i {
+    color: var(--danger);
+}
+
 
 .status-info {
     display: flex;
@@ -343,9 +365,18 @@ body {
     color: var(--success);
 }
 
+.risk-right.warning {
+    color: var(--warning);
+}
+
+.risk-right.danger {
+    color: var(--danger);
+}
+
 .risk-right i {
     font-size: 14px;
 }
+
 
 /* AI Recommendation Box */
 .recommendation-box {
@@ -356,6 +387,41 @@ body {
     margin-bottom: 30px;
     display: flex;
     gap: 12px;
+    transition: var(--transition);
+}
+
+.recommendation-box.warning {
+    background: #fffbeb;
+    border-left-color: var(--warning);
+}
+
+.recommendation-box.warning i {
+    color: var(--warning);
+}
+
+.recommendation-box.warning .recommendation-content h4 {
+    color: #92400e;
+}
+
+.recommendation-box.warning .recommendation-content p {
+    color: #b45309;
+}
+
+.recommendation-box.danger {
+    background: #fef2f2;
+    border-left-color: var(--danger);
+}
+
+.recommendation-box.danger i {
+    color: var(--danger);
+}
+
+.recommendation-box.danger .recommendation-content h4 {
+    color: #991b1b;
+}
+
+.recommendation-box.danger .recommendation-content p {
+    color: #b91c1c;
 }
 
 .recommendation-box i {
@@ -376,6 +442,7 @@ body {
     color: #166534;
     line-height: 1.5;
 }
+
 
 /* Actions */
 .actions-row {
