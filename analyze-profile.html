@@ -45,11 +45,11 @@
                     </div>
                 </div>
                 
-                <div class="status-box">
-                    <i class="fas fa-check-circle"></i>
+                <div class="status-box" id="statusBox">
+                    <i class="fas fa-check-circle" id="statusIcon"></i>
                     <div class="status-info">
-                        <span class="status-title">Trusted</span>
-                        <span class="status-desc">This profile looks authentic.</span>
+                        <span class="status-title" id="statusTitle">Trusted</span>
+                        <span class="status-desc" id="statusDesc">This profile looks authentic.</span>
                     </div>
                 </div>
             </div>
@@ -58,108 +58,49 @@
             <div class="metrics-row">
                 <div class="metric-card">
                     <div class="metric-label">Trust Score</div>
-                    <div class="metric-value success">85%</div>
-                    <div class="metric-sub success">High Trust</div>
+                    <div class="metric-value" id="trustScoreVal">85%</div>
+                    <div class="metric-sub" id="trustScoreSub">High Trust</div>
                 </div>
                 
                 <div class="metric-card">
                     <div class="metric-label">Fake Probability</div>
-                    <div class="metric-value success">15%</div>
-                    <div class="metric-sub success">Low Risk</div>
+                    <div class="metric-value" id="fakeProbVal">15%</div>
+                    <div class="metric-sub" id="fakeProbSub">Low Risk</div>
                 </div>
                 
                 <div class="metric-card">
                     <div class="metric-label">Engagement Rate</div>
-                    <div class="metric-value info" style="color: #8b5cf6;">6.8%</div>
-                    <div class="metric-sub info" style="color: #8b5cf6;">Good</div>
+                    <div class="metric-value" id="engagementVal" style="color: #8b5cf6;">6.8%</div>
+                    <div class="metric-sub" id="engagementSub" style="color: #8b5cf6;">Good</div>
                 </div>
             </div>
 
             <!-- Risk Indicators Checklist -->
             <div class="risk-section">
                 <h3 class="section-title">Risk Indicators</h3>
-                <div class="risk-grid">
-                    <div class="risk-item">
-                        <div class="risk-left">
-                            <i class="fas fa-user-circle"></i>
-                            <span>Profile Picture</span>
-                        </div>
-                        <div class="risk-right">
-                            <i class="fas fa-check-circle"></i>
-                            <span>No issues found</span>
-                        </div>
-                    </div>
-
-                    <div class="risk-item">
-                        <div class="risk-left">
-                            <i class="fas fa-at"></i>
-                            <span>Username</span>
-                        </div>
-                        <div class="risk-right">
-                            <i class="fas fa-check-circle"></i>
-                            <span>No issues found</span>
-                        </div>
-                    </div>
-
-                    <div class="risk-item">
-                        <div class="risk-left">
-                            <i class="fas fa-address-card"></i>
-                            <span>Bio & Info</span>
-                        </div>
-                        <div class="risk-right">
-                            <i class="fas fa-check-circle"></i>
-                            <span>No issues found</span>
-                        </div>
-                    </div>
-
-                    <div class="risk-item">
-                        <div class="risk-left">
-                            <i class="fas fa-users"></i>
-                            <span>Followers Quality</span>
-                        </div>
-                        <div class="risk-right">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Good</span>
-                        </div>
-                    </div>
-
-                    <div class="risk-item">
-                        <div class="risk-left">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Activity Pattern</span>
-                        </div>
-                        <div class="risk-right">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Normal</span>
-                        </div>
-                    </div>
-
-                    <div class="risk-item">
-                        <div class="risk-left">
-                            <i class="fas fa-heart"></i>
-                            <span>Engagement</span>
-                        </div>
-                        <div class="risk-right">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Good</span>
-                        </div>
-                    </div>
+                <div class="risk-grid" id="riskGrid">
+                    <!-- Dynamic Checklist items -->
                 </div>
             </div>
 
             <!-- AI Recommendation Box -->
-            <div class="recommendation-box">
-                <i class="fas fa-lightbulb"></i>
+            <div class="recommendation-box" id="recommendationBox">
+                <i class="fas fa-lightbulb" id="recIcon"></i>
                 <div class="recommendation-content">
-                    <h4>AI Recommendation</h4>
-                    <p>This profile appears to be authentic. Continue monitoring for any unusual activity.</p>
+                    <h4 id="recTitle">AI Recommendation</h4>
+                    <p id="recDesc">This profile appears to be authentic. Continue monitoring for any unusual activity.</p>
                 </div>
             </div>
 
             <!-- Action Buttons -->
-            <div class="actions-row">
-                <a href="profileanalyzer.html" class="btn btn-primary">Analyze Another Profile</a>
-                <a href="dashboard.html" class="btn btn-secondary">Return to Dashboard</a>
+            <div class="actions-row" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+                <a href="" id="detailedReportBtn" class="btn btn-primary" style="background: #2563eb; width: 100%; display: block; border: none; padding: 14px; border-radius: 10px; color: white; font-weight: 700; text-align: center; text-decoration: none; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.15); transition: background 0.3s;">
+                    <i class="fa-solid fa-file-invoice"></i> View Detailed Report
+                </a>
+                <div style="display: flex; gap: 12px; width: 100%;">
+                    <a href="profileanalyzer.html" class="btn btn-secondary" style="flex: 1; text-align: center; background: #e2e8f0; color: #475569; padding: 12px; border-radius: 10px; font-weight: 700; text-decoration: none;">Analyze Another</a>
+                    <a href="dashboard.html" class="btn btn-secondary" style="flex: 1; text-align: center; background: #e2e8f0; color: #475569; padding: 12px; border-radius: 10px; font-weight: 700; text-decoration: none;">Dashboard</a>
+                </div>
             </div>
 
         </div>
@@ -230,6 +171,331 @@
             const avatarUrl = avatars[sum % avatars.length];
             document.getElementById('userAvatar').src = avatarUrl;
 
+            // Generate deterministic score matching default history if applicable
+            let score;
+            if (username === "@username") {
+                score = 85;
+            } else if (username === "@another_user") {
+                score = 70;
+            } else if (username === "@user_test") {
+                score = 45;
+            } else {
+                score = 35 + (sum % 61);
+            }
+            const fakeProbability = 100 - score;
+            const engagementRate = ((sum % 80) / 10 + 1).toFixed(1) + "%";
+
+            // Update detailed report button href
+            const detailedReportBtn = document.getElementById('detailedReportBtn');
+            detailedReportBtn.href = `profile-detailed-report.html?url=${encodeURIComponent(rawUrl)}&platform=${encodeURIComponent(platform)}`;
+
+            // Populate Trust Score metrics
+            const trustScoreVal = document.getElementById('trustScoreVal');
+            const trustScoreSub = document.getElementById('trustScoreSub');
+            trustScoreVal.textContent = score + "%";
+            
+            const fakeProbVal = document.getElementById('fakeProbVal');
+            const fakeProbSub = document.getElementById('fakeProbSub');
+            fakeProbVal.textContent = fakeProbability + "%";
+
+            const engagementVal = document.getElementById('engagementVal');
+            const engagementSub = document.getElementById('engagementSub');
+            engagementVal.textContent = engagementRate;
+
+            // Handle thresholds
+            const statusBox = document.getElementById('statusBox');
+            const statusIcon = document.getElementById('statusIcon');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusDesc = document.getElementById('statusDesc');
+
+            const recBox = document.getElementById('recommendationBox');
+            const recIcon = document.getElementById('recIcon');
+            const recTitle = document.getElementById('recTitle');
+            const recDesc = document.getElementById('recDesc');
+
+            let riskItemsHTML = "";
+
+            if (score >= 80) {
+                statusBox.className = "status-box"; // default success
+                statusIcon.className = "fas fa-check-circle";
+                statusTitle.textContent = "Trusted";
+                statusDesc.textContent = "This profile looks authentic.";
+
+                trustScoreVal.className = "metric-value success";
+                trustScoreSub.className = "metric-sub success";
+                trustScoreSub.textContent = "High Trust";
+
+                fakeProbVal.className = "metric-value success";
+                fakeProbSub.className = "metric-sub success";
+                fakeProbSub.textContent = "Low Risk";
+
+                engagementSub.textContent = "Good";
+
+                recBox.className = "recommendation-box";
+                recIcon.className = "fas fa-lightbulb";
+                recTitle.textContent = "AI Recommendation";
+                recDesc.textContent = "This profile appears to be authentic. Continue monitoring for any unusual activity.";
+
+                riskItemsHTML = `
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profile Picture</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No issues found</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-at"></i>
+                            <span>Username</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No issues found</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-address-card"></i>
+                            <span>Bio & Info</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No issues found</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-users"></i>
+                            <span>Followers Quality</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Good</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Activity Pattern</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Normal</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-heart"></i>
+                            <span>Engagement</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Good</span>
+                        </div>
+                    </div>
+                `;
+            } else if (score >= 50) {
+                statusBox.className = "status-box warning";
+                statusIcon.className = "fas fa-exclamation-triangle";
+                statusTitle.textContent = "Low Risk";
+                statusDesc.textContent = "Some minor risk signals detected.";
+
+                trustScoreVal.className = "metric-value";
+                trustScoreVal.style.color = "var(--warning)";
+                trustScoreSub.className = "metric-sub";
+                trustScoreSub.style.color = "var(--warning)";
+                trustScoreSub.textContent = "Moderate Trust";
+
+                fakeProbVal.className = "metric-value";
+                fakeProbVal.style.color = "var(--warning)";
+                fakeProbSub.className = "metric-sub";
+                fakeProbSub.style.color = "var(--warning)";
+                fakeProbSub.textContent = "Medium Risk";
+
+                engagementSub.textContent = "Abnormal";
+
+                recBox.className = "recommendation-box warning";
+                recIcon.className = "fas fa-circle-exclamation";
+                recTitle.textContent = "AI Recommendation";
+                recDesc.textContent = "Profile shows minor discrepancies (e.g. erratic activity and potential stock photo usage). View detailed report for more information.";
+
+                riskItemsHTML = `
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profile Picture</span>
+                        </div>
+                        <div class="risk-right warning">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <span>Stock photo?</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-at"></i>
+                            <span>Username</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No issues found</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-address-card"></i>
+                            <span>Bio & Info</span>
+                        </div>
+                        <div class="risk-right warning">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <span>Affiliate links</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-users"></i>
+                            <span>Followers Quality</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Good</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Activity Pattern</span>
+                        </div>
+                        <div class="risk-right warning">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <span>Erratic</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-heart"></i>
+                            <span>Engagement</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Normal</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                statusBox.className = "status-box danger";
+                statusIcon.className = "fas fa-ban";
+                statusTitle.textContent = "High Risk";
+                statusDesc.textContent = "Highly likely to be a bot or fake profile.";
+
+                trustScoreVal.className = "metric-value";
+                trustScoreVal.style.color = "var(--danger)";
+                trustScoreSub.className = "metric-sub";
+                trustScoreSub.style.color = "var(--danger)";
+                trustScoreSub.textContent = "Low Trust";
+
+                fakeProbVal.className = "metric-value";
+                fakeProbVal.style.color = "var(--danger)";
+                fakeProbSub.className = "metric-sub";
+                fakeProbSub.style.color = "var(--danger)";
+                fakeProbSub.textContent = "High Risk";
+
+                engagementSub.textContent = "Very Low";
+
+                recBox.className = "recommendation-box danger";
+                recIcon.className = "fas fa-triangle-exclamation";
+                recTitle.textContent = "AI Recommendation";
+                recDesc.textContent = "CRITICAL WARNING: This account is flagged as a bot. High concentration of bot followers and machine-generated bio content detected.";
+
+                riskItemsHTML = `
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profile Picture</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>AI Generated Face</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-at"></i>
+                            <span>Username</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>High Entropy</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-address-card"></i>
+                            <span>Bio & Info</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>Spam Pattern</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-users"></i>
+                            <span>Followers Quality</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>Bot-like (90%+)</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Activity Pattern</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>Spam Frequency</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-heart"></i>
+                            <span>Engagement</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>Low quality</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('riskGrid').innerHTML = riskItemsHTML;
+
+            // Push profile to session storage and/or local storage history so it registers
+            try {
+                const currentHistory = JSON.parse(localStorage.getItem("sma_analysis_history")) || [];
+                // Add if not already present
+                if (!currentHistory.some(item => item.target === username)) {
+                    currentHistory.unshift({
+                        id: Date.now().toString(),
+                        type: "profile",
+                        target: username,
+                        platform: platform,
+                        result: (score >= 80 ? "Trusted" : (score >= 50 ? "Low Risk" : "High Risk")),
+                        score: score,
+                        date: "Just now"
+                    });
+                    localStorage.setItem("sma_analysis_history", JSON.stringify(currentHistory));
+                }
+            } catch (e) {
+                console.error("Failed to update local storage history:", e);
+            }
+
             // 2. Simulated AI Scan loader animation: 1.5 seconds
             setTimeout(() => {
                 const overlay = document.getElementById('loaderOverlay');
@@ -242,5 +508,6 @@
             }, 1500);
         });
     </script>
+
 </body>
 </html>
