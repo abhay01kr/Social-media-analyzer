@@ -1,44 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Social Media Analyzer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-box">
-            <h1>Create Your Account</h1>
 
-            <input type="text" placeholder="Full Name" name="name" required><br><br>
-            <input type="email" placeholder="Email Address" name="email" required><br><br>
-            <input type="password" placeholder="Password" name="password" required><br><br>
-            <input type="password" placeholder="Confirm Password" name="confirm_password" required><br><br>
+  <div class="auth-container">
+    <div class="auth-card">
+      
+      <!-- Brand Logo & Header -->
+      <div class="auth-header">
+        <div class="auth-logo">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <h2>Create Your Account</h2>
+        <p>Join Social Media Analyzer today</p>
+      </div>
 
-            <button onclick="showSuccess()">
-    Create Account
-</button>
+      <!-- Success Toast (Initially Hidden) -->
+      <div id="successMsg" class="alert-toast" style="display: none;">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Account Created Successfully! Redirecting...</span>
+      </div>
 
-<p id="successMsg" style="display:none; color:lime; font-size:20px; margin-top:15px;">
-    ✅ Account Created Successfully!
-</p>
+      <!-- Form -->
+      <form id="signupForm" onsubmit="handleSignup(event)">
+        <!-- Full Name Input -->
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <div class="input-wrapper">
+            <input type="text" id="fullName" class="input-control" placeholder="Enter your full name" required autocomplete="name">
+            <i class="fa-regular fa-user"></i>
+          </div>
+        </div>
 
-<p>
-    Already have an account?
-    <a href="login.html">Login</a>
-</p>
+        <!-- Email Input -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <input type="email" id="email" class="input-control" placeholder="Enter your email" required autocomplete="email">
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+        </div>
 
-</div>
-</div>
+        <!-- Password Input -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="password" class="input-control" placeholder="Enter your password" required autocomplete="new-password">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+        </div>
 
-<script>
-function showSuccess() {
-    document.getElementById("successMsg").style.display = "block";
+        <!-- Confirm Password Input -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="confirmPassword" class="input-control" placeholder="Confirm your password" required autocomplete="new-password">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+        </div>
 
-    setTimeout(function () {
+        <!-- Terms Checkbox -->
+        <div class="form-options" style="justify-content: flex-start; margin-bottom: 24px;">
+          <label class="remember-checkbox">
+            <input type="checkbox" id="termsCheck" required>
+            <span>I agree to the <a href="#" style="color: var(--primary-light); font-weight: 600; text-decoration: none;" onclick="showTerms(event)">Terms & Conditions</a> and <a href="#" style="color: var(--primary-light); font-weight: 600; text-decoration: none;" onclick="showPrivacy(event)">Privacy Policy</a></span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-solid fa-user-plus"></i> Create Account
+        </button>
+      </form>
+
+      <!-- Footer Links -->
+      <div class="auth-footer">
+        Already have an account? <a href="login.html">Login</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check if dark mode is applied globally
+      if (localStorage.getItem("pref_dark_mode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+
+    function handleSignup(event) {
+      event.preventDefault();
+      
+      const fullName = document.getElementById("fullName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const termsCheck = document.getElementById("termsCheck").checked;
+
+      // Reset styles
+      document.getElementById("confirmPassword").style.borderColor = "";
+
+      if (!fullName || !email || !password || !confirmPassword) {
+        alert("Please fill in all the required fields.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        document.getElementById("confirmPassword").style.borderColor = "#ef4444";
+        alert("Passwords do not match. Please verify and try again.");
+        return;
+      }
+
+      if (!termsCheck) {
+        alert("You must agree to the Terms & Conditions and Privacy Policy to continue.");
+        return;
+      }
+
+      // Save dummy values in local storage for account settings profile page
+      localStorage.setItem("user_full_name", fullName);
+      localStorage.setItem("user_email", email);
+
+      // Disable submission & show loader
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating Account...';
+
+      // Show success toast & redirect
+      document.getElementById("successMsg").style.display = "flex";
+
+      setTimeout(() => {
         window.location.href = "login.html";
-    }, 2000);
-}
-</script>
+      }, 2000);
+    }
+
+    function showTerms(event) {
+      event.preventDefault();
+      alert("Social Media Analyzer Terms of Service:\n\n1. You agree not to misuse the scanning tools for malicious activities.\n2. Deepfake detection is for informational purposes only.\n3. Your scanned data is subject to our security parameters.");
+    }
+
+    function showPrivacy(event) {
+      event.preventDefault();
+      alert("Social Media Analyzer Privacy Policy:\n\n1. We respect your data confidentiality.\n2. Profiles and uploaded videos are analyzed transiently and not stored without authorization.");
+    }
+  </script>
 
 </body>
 </html>
