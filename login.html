@@ -1,30 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Social Media Analyzer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-box">
-            <h1>Welcome Back!</h1>
-            <p>Login to your account</p>
 
-            <input type="email" placeholder="Email Address"><br><br>
-            <input type="password" placeholder="Password"><br><br>
-
-            <a href="#" class="forgot">Forgot Password?</a>
-            <button type="button" id="login-button">Login</button>
-            <br><br>
-
-            <div class="divider"></div>
-
-            <button onclick="window.location.href='dashboard.html'">
-              Login
-            </button>
-
-            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+  <div class="auth-container">
+    <div class="auth-card">
+      
+      <!-- Brand Logo & Header -->
+      <div class="auth-header">
+        <div class="auth-logo">
+          <i class="fa-solid fa-brain"></i>
         </div>
+        <h2>Welcome Back!</h2>
+        <p>Login to your account</p>
+      </div>
+
+      <!-- Form -->
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <!-- Email Input -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <input type="email" id="email" class="input-control" placeholder="Enter your email" required autocomplete="email">
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="password" class="input-control" placeholder="Enter your password" required autocomplete="current-password">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+        </div>
+
+        <!-- Form Options (Forgot Password) -->
+        <div class="form-options">
+          <label class="remember-checkbox">
+            <input type="checkbox" id="rememberMe"> Remember me
+          </label>
+          <a href="#" class="forgot-password" onclick="handleForgotPassword()">Forgot Password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-solid fa-right-to-bracket"></i> Login
+        </button>
+
+        <!-- Divider -->
+        <div class="auth-divider">or</div>
+
+        <!-- Google Login -->
+        <button type="button" class="btn btn-social" onclick="simulateGoogleLogin()">
+          <i class="fa-brands fa-google"></i> Login with Google
+        </button>
+      </form>
+
+      <!-- Footer Links -->
+      <div class="auth-footer">
+        Don't have an account? <a href="signup.html">Sign Up</a>
+      </div>
+
     </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check if dark mode is applied globally
+      if (localStorage.getItem("pref_dark_mode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+
+      // Autofill email if remembered
+      const rememberedEmail = localStorage.getItem("remembered_auth_email");
+      if (rememberedEmail) {
+        document.getElementById("email").value = rememberedEmail;
+        document.getElementById("rememberMe").checked = true;
+      }
+    });
+
+    function handleLogin(event) {
+      event.preventDefault();
+      
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const rememberMe = document.getElementById("rememberMe").checked;
+
+      if (!email || !password) {
+        alert("Please enter both email and password.");
+        return;
+      }
+
+      // Handle remember me logic
+      if (rememberMe) {
+        localStorage.setItem("remembered_auth_email", email);
+      } else {
+        localStorage.removeItem("remembered_auth_email");
+      }
+
+      // Mock save profile state in settings if it doesn't exist
+      if (!localStorage.getItem("user_email")) {
+        localStorage.setItem("user_email", email);
+        localStorage.setItem("user_full_name", email.split('@')[0]);
+      }
+
+      // Add a visual redirect delay
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
+
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 1200);
+    }
+
+    function simulateGoogleLogin() {
+      alert("Simulating Google login flow...");
+      
+      // Auto populate and redirect for ease of prototype demo
+      localStorage.setItem("user_email", "demo.user@gmail.com");
+      localStorage.setItem("user_full_name", "Demo User");
+      
+      window.location.href = "dashboard.html";
+    }
+
+    function handleForgotPassword() {
+      const email = prompt("Enter your email address to reset password:");
+      if (email && email.trim().length > 0) {
+        alert(`Password reset instructions sent to: ${email}`);
+      }
+    }
+  </script>
+
 </body>
 </html>
