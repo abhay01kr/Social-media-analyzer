@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Analyzer - AI Deepfake & Fake Profile Detection</title>
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <nav>
+    <a href="home.html" class="logo" title="Social Media Analyzer Home">
+      <div class="logo-icon-wrapper">
+        <i class="fas fa-brain"></i>
+      </div>
+      <span>Social Media Analyzer</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#profile-section" class="nav-link active" id="navHome" title="Scroll to Profile Analyzer"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="#live-data" class="nav-link" id="navLiveData"><i class="fa-solid fa-chart-simple"></i> Live Data</a></li>
+      <li><a href="#features" class="nav-link" id="navFeatures"><i class="fa-solid fa-sparkles"></i> Features</a></li>
+      <li><a href="#how-it-works" class="nav-link" id="navHow"><i class="fa-solid fa-diagram-project"></i> How It Works</a></li>
+      <li><a href="#contact" class="nav-link" id="navContact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+      <button class="dash-nav-btn" onclick="window.location.href='dashboard.html'" title="Open Dashboard">
+        <i class="fa-solid fa-chart-line"></i> Dashboard
+      </button>
+      <button class="login-btn" onclick="window.location.href='login.html'">
+        Login
+      </button>
+      <button class="signup-btn" onclick="window.location.href='signup.html'">
+        Sign Up
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section (#home) -->
+  <section class="hero" id="home">
+    <div class="hero-glow-blob"></div>
+    <div class="hero-glow-blob-2"></div>
+
+    <!-- Left Column: Value Proposition -->
+    <div class="left">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span> Next-Gen AI Verification Engine
+      </div>
+
+      <h1>
+        Detect Fake Profiles & Verify Videos with <span class="gradient-text">AI</span>
+      </h1>
+
+      <p>
+        Analyze social media profiles and videos instantly with multi-layer neural network
+        forensics, bot swarm detection, and real-time authenticity scoring.
+      </p>
+
+      <div class="buttons">
+        <button class="primary-btn" onclick="window.location.href='profileanalyzer.html'">
+          <i class="fa-solid fa-user-shield"></i> Analyze Profile
+        </button>
+        <button class="secondary-btn" onclick="window.location.href='analyze-video.html'">
+          <i class="fa-solid fa-video"></i> Analyze Video
+        </button>
+        <button class="tertiary-btn" onclick="document.getElementById('live-data').scrollIntoView({behavior: 'smooth'})">
+          <i class="fa-solid fa-chart-column"></i> Explore Live Data
+        </button>
+      </div>
+
+      <!-- Quick Stats Strip -->
+      <div class="hero-stats-strip">
+        <div class="strip-item">
+          <h4>1,248+</h4>
+          <p>Profiles Analyzed</p>
+        </div>
+        <div class="strip-item">
+          <h4>98.4%</h4>
+          <p>Detection Precision</p>
+        </div>
+        <div class="strip-item">
+          <h4>0.8s</h4>
+          <p>Avg Scan Latency</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Live Interactive Dashboard Showcase Card -->
+    <div class="right">
+      <div class="dashboard-showcase">
+        
+        <!-- Showcase Header -->
+        <div class="showcase-header">
+          <div class="showcase-title-box">
+            <h3><i class="fa-solid fa-gauge-high"></i> Dashboard Overview</h3>
+            <p>Live telemetry & AI threat evaluation</p>
+          </div>
+          <div class="live-badge">
+            <span class="pulse-dot green"></span> Live Sync
+          </div>
+        </div>
+
+        <!-- 4 Stat Metric Cards -->
+        <div class="showcase-metrics-grid">
+          
+          <!-- Trust Score Card -->
+          <div class="mini-stat-card">
+            <div class="mini-stat-header">
+              <span>Trust Score</span>
+              <i class="fa-solid fa-shield-check mini-stat-icon"></i>
+            </div>
+            <div class="mini-stat-value cyan">85%</div>
+            <div class="mini-stat-sub">
+              <span class="badge-tag-pill green">
+                <i class="fa-solid fa-check"></i> Trusted Account
+              </span>
+            </div>
+          </div>
+
+          <!-- Risk Level Card -->
+          <div class="mini-stat-card">
+            <div class="mini-stat-header">
+              <span>Risk Level</span>
+              <i class="fa-solid fa-triangle-exclamation mini-stat-icon"></i>
+            </div>
+            <div class="mini-stat-value" style="color: #34d399; font-size: 22px;">Low Risk</div>
+            <div class="mini-stat-sub">
+              <span class="badge-tag-pill green">0 Critical Flags</span>
+            </div>
+          </div>
+
+          <!-- Profiles Analyzed Card -->
+          <div class="mini-stat-card">
+            <div class="mini-stat-header">
+              <span>Total Analyses</span>
+              <i class="fa-solid fa-chart-simple mini-stat-icon"></i>
+            </div>
+            <div class="mini-stat-value">1,248</div>
+            <div class="mini-stat-sub">
+              <span class="badge-tag-pill blue">↑ +10% this week</span>
+            </div>
+          </div>
+
+          <!-- AI Engine Accuracy Card -->
+          <div class="mini-stat-card">
+            <div class="mini-stat-header">
+              <span>Detection Rate</span>
+              <i class="fa-solid fa-brain mini-stat-icon"></i>
+            </div>
+            <div class="mini-stat-value">98.4%</div>
+            <div class="mini-stat-sub">
+              <span class="badge-tag-pill cyan">Neural Guard Active</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive Chart Section -->
+        <div class="showcase-chart-box">
+          <div class="chart-box-header">
+            <h4><i class="fa-solid fa-chart-line"></i> Analysis Summary</h4>
+            <span class="chart-time-pill">Past 7 Days ▼</span>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="heroAnalysisChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Recent Live Activity Feed -->
+        <div class="showcase-activity-box">
+          <div class="activity-box-header">
+            <h4><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity</h4>
+            <span class="activity-count-badge">Live Stream</span>
+          </div>
+          <div class="activity-list" id="heroRecentActivityList">
+            <!-- Populated dynamically by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Showcase Footer Quick Actions -->
+        <div class="showcase-footer">
+          <a href="dashboard.html" class="showcase-link-btn">
+            Open Full Dashboard <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="history.html" class="showcase-link-btn">
+            View All History <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 2: ALL DATA & LIVE PLATFORM INTELLIGENCE (#live-data)
+       ========================================================================== -->
+  <section class="live-data-section" id="live-data">
+    <div class="section-header">
+      <span class="section-tag"><i class="fa-solid fa-database"></i> Live Platform Data Hub</span>
+      <h2>All Platform Intelligence & Detection Records</h2>
+      <p>
+        Explore real-time telemetry, test any account with our instant scanner, and review all
+        profile and video analyses logged across the platform.
+      </p>
+    </div>
+
+    <!-- Quick Interactive Analyzer Box on Home (Profile Section) -->
+    <div class="quick-scan-wrapper" id="profile-section">
+      <div class="quick-scan-header">
+        <h3><i class="fa-solid fa-user-shield" style="color: var(--accent-cyan);"></i> Profile Analyzer & Verification Scanner</h3>
+        <div class="quick-scan-tabs">
+          <button class="quick-tab-btn active" id="tabProfile" onclick="setQuickScanMode('profile')">Profile Scan</button>
+          <button class="quick-tab-btn" id="tabVideo" onclick="setQuickScanMode('video')">Video Scan</button>
+        </div>
+      </div>
+
+      <!-- Quick Form -->
+      <form id="quickScanForm" onsubmit="handleQuickScan(event)" class="quick-scan-form">
+        <div class="input-platform-group" id="profileInputsGroup">
+          <select id="quickPlatform" class="select-platform-control">
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="X">X (Twitter)</option>
+            <option value="TikTok">TikTok</option>
+            <option value="LinkedIn">LinkedIn</option>
+          </select>
+          <input type="text" id="quickTarget" class="input-target-control" placeholder="Enter username (e.g. @username) or profile URL..." required>
+        </div>
+
+        <button type="submit" class="btn-run-quick-scan" id="btnQuickSubmit">
+          <i class="fa-solid fa-magnifying-glass"></i> Analyze Now
+        </button>
+      </form>
+    </div>
+
+    <!-- Platform Telemetry Distribution Cards -->
+    <div class="platform-grid">
+      
+      <!-- Instagram Card -->
+      <div class="platform-card instagram">
+        <div class="platform-card-header">
+          <div class="platform-icon-circle">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <span class="platform-name">Instagram</span>
+        </div>
+        <div class="platform-volume">642</div>
+        <div class="platform-bar-track">
+          <div class="platform-bar-fill" style="width: 91%;"></div>
+        </div>
+        <div class="platform-card-footer">
+          <span>Authentic: <strong>91%</strong></span>
+          <span>58 Bots Flagged</span>
+        </div>
+      </div>
+
+      <!-- TikTok Card -->
+      <div class="platform-card tiktok">
+        <div class="platform-card-header">
+          <div class="platform-icon-circle">
+            <i class="fa-brands fa-tiktok"></i>
+          </div>
+          <span class="platform-name">TikTok</span>
+        </div>
+        <div class="platform-volume">318</div>
+        <div class="platform-bar-track">
+          <div class="platform-bar-fill" style="width: 84%; background: linear-gradient(90deg, #00e5ff, #8b5cf6);"></div>
+        </div>
+        <div class="platform-card-footer">
+          <span>Authentic: <strong>84%</strong></span>
+          <span>47 Deepfakes</span>
+        </div>
+      </div>
+
+      <!-- Facebook Card -->
+      <div class="platform-card facebook">
+        <div class="platform-card-header">
+          <div class="platform-icon-circle">
+            <i class="fa-brands fa-facebook-f"></i>
+          </div>
+          <span class="platform-name">Facebook</span>
+        </div>
+        <div class="platform-volume">184</div>
+        <div class="platform-bar-track">
+          <div class="platform-bar-fill" style="width: 86%;"></div>
+        </div>
+        <div class="platform-card-footer">
+          <span>Authentic: <strong>86%</strong></span>
+          <span>29 Impersonators</span>
+        </div>
+      </div>
+
+      <!-- X / Twitter Card -->
+      <div class="platform-card x-twitter">
+        <div class="platform-card-header">
+          <div class="platform-icon-circle">
+            <i class="fa-brands fa-x-twitter"></i>
+          </div>
+          <span class="platform-name">X (Twitter)</span>
+        </div>
+        <div class="platform-volume">104</div>
+        <div class="platform-bar-track">
+          <div class="platform-bar-fill" style="width: 74%; background: linear-gradient(90deg, #f59e0b, #ef4444);"></div>
+        </div>
+        <div class="platform-card-footer">
+          <span>Authentic: <strong>74%</strong></span>
+          <span>31 Bot Swarms</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Complete Analyses Records Table -->
+    <div class="data-table-card">
+      <div class="table-controls-bar">
+        <div class="table-controls-left">
+          <h3><i class="fa-solid fa-list-check"></i> Complete Analysis Records</h3>
+        </div>
+        <div class="table-filter-pills">
+          <button class="table-pill active" onclick="filterTable('all')">All Records</button>
+          <button class="table-pill" onclick="filterTable('profile')">Profiles Only</button>
+          <button class="table-pill" onclick="filterTable('video')">Videos Only</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Type & Target</th>
+              <th>Platform / Format</th>
+              <th>AI Trust Score</th>
+              <th>Verdict</th>
+              <th>Time</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="homeDataTableBody">
+            <!-- Populated dynamically via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- AI Detection Benchmarks Grid -->
+    <div class="benchmarks-grid">
+      <div class="benchmark-card">
+        <h4>99.2%</h4>
+        <p>Facial Geometry Precision</p>
+      </div>
+      <div class="benchmark-card">
+        <h4>97.8%</h4>
+        <p>Temporal Frame Coherence</p>
+      </div>
+      <div class="benchmark-card">
+        <h4>95.4%</h4>
+        <p>Bot Heuristics Scoring</p>
+      </div>
+      <div class="benchmark-card">
+        <h4>1.14s</h4>
+        <p>Median Scan Latency</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: FEATURES (#features)
+       ========================================================================== -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <span class="section-tag"><i class="fa-solid fa-cube"></i> Core Capabilities</span>
+      <h2>Precision AI Inspection Suite</h2>
+      <p>
+        Enterprise-grade tools built with deep neural networks to inspect accounts,
+        detect deepfakes, and generate conclusive verification reports.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      
+      <!-- Feature 1: Profile Analyzer -->
+      <div class="feature-box">
+        <div class="feature-icon-wrapper purple">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <h3>Profile Analyzer</h3>
+        <p>
+          Thoroughly evaluate profiles on Instagram, Facebook, TikTok, and X.
+          Detect bot followers, profile cloning, fake engagement, and AI-generated avatars.
+        </p>
+        <ul class="feature-checklist">
+          <li><i class="fa-solid fa-check"></i> Profile Consistency & Bio Analysis</li>
+          <li><i class="fa-solid fa-check"></i> Avatar & Synthetic Face Detection</li>
+          <li><i class="fa-solid fa-check"></i> Follower Authenticity Breakdown</li>
+        </ul>
+      </div>
+
+      <!-- Feature 2: Video Analyzer -->
+      <div class="feature-box">
+        <div class="feature-icon-wrapper green">
+          <i class="fa-solid fa-video"></i>
+        </div>
+        <h3>Video Deepfake Analyzer</h3>
+        <p>
+          Examine video uploads frame-by-frame for facial warping, GAN temporal artifacts,
+          lip-sync inconsistencies, and voice cloning anomalies.
+        </p>
+        <ul class="feature-checklist">
+          <li><i class="fa-solid fa-check"></i> Frame-by-Frame Neural Inspection</li>
+          <li><i class="fa-solid fa-check"></i> Deepfake Probability Heatmap</li>
+          <li><i class="fa-solid fa-check"></i> Audio-Visual Coherence Verification</li>
+        </ul>
+      </div>
+
+      <!-- Feature 3: AI Live Dashboard -->
+      <div class="feature-box">
+        <div class="feature-icon-wrapper cyan">
+          <i class="fa-solid fa-chart-pie"></i>
+        </div>
+        <h3>Live AI Analytics Dashboard</h3>
+        <p>
+          Monitor all analyses, view interactive timeline charts, customize risk thresholds,
+          and export comprehensive forensic PDF reports.
+        </p>
+        <ul class="feature-checklist">
+          <li><i class="fa-solid fa-check"></i> Real-time Telemetry & Trend Graphs</li>
+          <li><i class="fa-solid fa-check"></i> Historical Audit Logs & Search</li>
+          <li><i class="fa-solid fa-check"></i> Comprehensive PDF Export</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: HOW IT WORKS (#how-it-works)
+       ========================================================================== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-header">
+      <span class="section-tag"><i class="fa-solid fa-route"></i> Simple Process</span>
+      <h2>How Social Media Analyzer Works</h2>
+      <p>From submission to verifiable AI forensic report in four streamlined steps.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Enter URL or Upload</h3>
+        <p>Paste any social media profile link or drag & drop a video file into the scanner.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>AI Neural Processing</h3>
+        <p>Our computer vision and behavioral models extract metadata and analyze frame patterns.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Multi-Layer Risk Scoring</h3>
+        <p>Automated algorithms compute an overall Trust Score and classify threat risk levels.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>Detailed Report</h3>
+        <p>Review comprehensive findings, risk factors, and download forensic PDF documentation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CTA BANNER SECTION
+       ========================================================================== -->
+  <section class="cta-banner-section">
+    <div class="cta-banner-box">
+      <div class="cta-banner-text">
+        <h2>Ready to Verify Authenticity?</h2>
+        <p>Start analyzing profiles and detecting video deepfakes with AI precision today.</p>
+      </div>
+      <div class="cta-banner-actions">
+        <button class="btn-cta-launch" onclick="window.location.href='dashboard.html'">
+          <i class="fa-solid fa-chart-line"></i> Launch Dashboard
+        </button>
+        <button class="btn-cta-launch" style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3);" onclick="window.location.href='profileanalyzer.html'">
+          <i class="fa-solid fa-bolt"></i> Quick Scan
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 5: CONTACT US (#contact)
+       ========================================================================== -->
+  <section class="contact-section" id="contact">
+    <div class="section-header">
+      <span class="section-tag"><i class="fa-solid fa-headset"></i> Support</span>
+      <h2>Get In Touch</h2>
+      <p>Have questions about enterprise integrations or API access? Reach out to our team.</p>
+    </div>
+
+    <div class="contact-cards-grid">
+      <div class="contact-card">
+        <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
+        <h4>Email Support</h4>
+        <p>help@socialanalyzer.ai</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon"><i class="fa-solid fa-phone"></i></div>
+        <h4>Phone Contact</h4>
+        <p>+91 9876543210</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h4>Security Office</h4>
+        <p>security@socialanalyzer.ai</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom: 14px;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          <div class="logo-icon-wrapper" style="width: 34px; height: 34px; font-size: 15px;">
+            <i class="fas fa-brain"></i>
+          </div>
+          <span>Social Media Analyzer</span>
+        </div>
+        <p>
+          Next-generation AI platform to detect synthetic fake profiles, automated bot farms,
+          and deepfake media across global social networks.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Platform</h3>
+        <a href="home.html#home"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#live-data"><i class="fa-solid fa-chart-simple"></i> Live Data Hub</a>
+        <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="profileanalyzer.html"><i class="fa-solid fa-user-check"></i> Profile Analyzer</a>
+        <a href="analyze-video.html"><i class="fa-solid fa-video"></i> Video Analyzer</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="history.html">Analysis History</a>
+        <a href="#contact">Contact Support</a>
+        <a href="settings.html">Account Settings</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Security & Compliance</h3>
+        <p style="margin-bottom: 10px;">AES-256 Encrypted Telemetry. ISO/IEC 27001 AI Safety Certified.</p>
+        <span class="live-badge" style="font-size: 11px;">
+          <span class="pulse-dot green"></span> All Systems Operational
+        </span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Social Media Analyzer Inc. All rights reserved.</span>
+      <span>Privacy Policy &bull; Terms of Service &bull; System Status</span>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SCRIPTS: Chart.js & Live Data Logic
+       ========================================================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Default fallback history data
+    const defaultData = [
+      { id: "1", type: "profile", target: "@username", platform: "Instagram", result: "Trusted", score: 85, date: "2m ago" },
+      { id: "2", type: "video", target: "video.mp4", platform: "Deepfake Check", result: "Authentic", score: 92, date: "10m ago" },
+      { id: "3", type: "profile", target: "@another_user", platform: "Facebook", result: "Low Risk", score: 70, date: "1h ago" },
+      { id: "4", type: "video", target: "video2.mp4", platform: "Deepfake Check", result: "Authentic", score: 90, date: "3h ago" },
+      { id: "5", type: "profile", target: "@user_test", platform: "TikTok", result: "High Risk", score: 45, date: "5h ago" }
+    ];
+
+    // Fetch history from localStorage
+    function getStoredHistory() {
+      const stored = localStorage.getItem("sma_analysis_history");
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        } catch(e) {}
+      }
+      localStorage.setItem("sma_analysis_history", JSON.stringify(defaultData));
+      return defaultData;
+    }
+
+    // Initialize Hero Chart with Chart.js
+    function initHeroChart() {
+      const canvas = document.getElementById('heroAnalysisChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const gradient = ctx.createLinearGradient(0, 0, 0, 140);
+      gradient.addColorStop(0, 'rgba(0, 229, 255, 0.35)');
+      gradient.addColorStop(1, 'rgba(0, 229, 255, 0.0)');
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          datasets: [{
+            label: 'Daily Scans',
+            data: [24, 38, 31, 58, 72, 88, 98],
+            borderColor: '#00e5ff',
+            backgroundColor: gradient,
+            borderWidth: 2.5,
+            tension: 0.45,
+            fill: true,
+            pointBackgroundColor: '#00e5ff',
+            pointBorderColor: '#fff',
+            pointRadius: 3,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#111827',
+              borderColor: 'rgba(255,255,255,0.1)',
+              borderWidth: 1,
+              padding: 10,
+              titleColor: '#fff',
+              bodyColor: '#00e5ff'
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#64748b', font: { size: 11, family: 'Inter' } },
+              border: { display: false }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)', drawBorder: false },
+              ticks: { color: '#64748b', font: { size: 11, family: 'Inter' } },
+              border: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    // Render Recent Live Activity in Hero Showcase Card
+    function renderHeroRecentActivity() {
+      const container = document.getElementById('heroRecentActivityList');
+      if (!container) return;
+
+      const items = getStoredHistory().slice(0, 3);
+      container.innerHTML = items.map(item => {
+        const isVideo = item.type === 'video';
+        let iconClass = 'activity-icon-badge';
+        let iconHtml = '<i class="fa-solid fa-user"></i>';
+
+        if (isVideo) {
+          iconClass += ' video';
+          iconHtml = '<i class="fa-solid fa-video"></i>';
+        } else if (item.platform && item.platform.toLowerCase().includes('instagram')) {
+          iconClass += ' instagram';
+          iconHtml = '<i class="fa-brands fa-instagram"></i>';
+        } else if (item.platform && item.platform.toLowerCase().includes('facebook')) {
+          iconClass += ' facebook';
+          iconHtml = '<i class="fa-brands fa-facebook-f"></i>';
+        } else if (item.platform && item.platform.toLowerCase().includes('tiktok')) {
+          iconClass += ' tiktok';
+          iconHtml = '<i class="fa-brands fa-tiktok"></i>';
+        } else {
+          iconClass += ' instagram';
+        }
+
+        const score = item.score || 85;
+        let scoreClass = 'score-badge high';
+        if (score < 50) scoreClass = 'score-badge low';
+        else if (score < 75) scoreClass = 'score-badge mid';
+
+        const linkUrl = isVideo ? 'detailed-report.html' : `profile-detailed-report.html?url=${encodeURIComponent(item.target)}&platform=${encodeURIComponent(item.platform || 'Instagram')}`;
+
+        return `
+          <a href="${linkUrl}" class="activity-item" title="Click to view full analysis report">
+            <div class="activity-item-left">
+              <div class="${iconClass}">${iconHtml}</div>
+              <div class="activity-meta">
+                <h5>${escapeHtml(item.target)}</h5>
+                <p>${escapeHtml(item.platform || (isVideo ? 'Video Check' : 'Profile'))} &bull; ${escapeHtml(item.date)}</p>
+              </div>
+            </div>
+            <div class="activity-item-right">
+              <span class="${scoreClass}">${score}% Trust</span>
+              <i class="fa-solid fa-chevron-right" style="font-size: 11px; color: #64748b;"></i>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // Render All Data Table in #live-data Section
+    let currentFilter = 'all';
+
+    function renderLiveDataTable() {
+      const tbody = document.getElementById('homeDataTableBody');
+      if (!tbody) return;
+
+      const allItems = getStoredHistory();
+      const filtered = allItems.filter(item => {
+        if (currentFilter === 'all') return true;
+        return item.type === currentFilter;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 40px; color: #64748b;">
+              <i class="fa-solid fa-folder-open" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
+              No records match this category.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(item => {
+        const isVideo = item.type === 'video';
+        const target = item.target || '@username';
+        const platform = item.platform || (isVideo ? 'MP4 Video' : 'Social Profile');
+        const score = item.score || 85;
+        const date = item.date || 'Recent';
+        const result = item.result || (score >= 80 ? 'Trusted' : (score >= 60 ? 'Low Risk' : 'High Risk'));
+
+        let icon = '<i class="fa-solid fa-user"></i>';
+        if (isVideo) icon = '<i class="fa-solid fa-video"></i>';
+        else if (platform.toLowerCase().includes('instagram')) icon = '<i class="fa-brands fa-instagram"></i>';
+        else if (platform.toLowerCase().includes('facebook')) icon = '<i class="fa-brands fa-facebook-f"></i>';
+        else if (platform.toLowerCase().includes('tiktok')) icon = '<i class="fa-brands fa-tiktok"></i>';
+
+        let chipClass = 'status-chip trusted';
+        let barColor = 'linear-gradient(90deg, #10b981, #00e5ff)';
+        if (score < 50 || result.toLowerCase().includes('high')) {
+          chipClass = 'status-chip high-risk';
+          barColor = 'linear-gradient(90deg, #ef4444, #f43f5e)';
+        } else if (score < 75 || result.toLowerCase().includes('low')) {
+          chipClass = 'status-chip low-risk';
+          barColor = 'linear-gradient(90deg, #3b82f6, #60a5fa)';
+        }
+
+        const reportLink = isVideo 
+          ? 'detailed-report.html' 
+          : `profile-detailed-report.html?url=${encodeURIComponent(target)}&platform=${encodeURIComponent(platform)}`;
+
+        return `
+          <tr>
+            <td>
+              <div class="target-cell">
+                <div class="target-icon">${icon}</div>
+                <div>
+                  <div>${escapeHtml(target)}</div>
+                  <div style="font-size: 11px; color: #64748b; font-weight: normal;">${isVideo ? 'Video File' : 'Social Account'}</div>
+                </div>
+              </div>
+            </td>
+            <td><span style="color: #cbd5e1; font-weight: 500;">${escapeHtml(platform)}</span></td>
+            <td>
+              <div class="score-progress-wrap">
+                <div class="score-progress-track">
+                  <div class="score-progress-bar" style="width: ${score}%; background: ${barColor};"></div>
+                </div>
+                <strong style="color: #fff; font-size: 13px;">${score}%</strong>
+              </div>
+            </td>
+            <td><span class="${chipClass}"><i class="fa-solid fa-circle" style="font-size: 7px;"></i> ${escapeHtml(result)}</span></td>
+            <td style="color: #64748b;">${escapeHtml(date)}</td>
+            <td>
+              <a href="${reportLink}" class="table-action-btn">
+                <i class="fa-solid fa-eye"></i> View Report
+              </a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Filter Table records
+    function filterTable(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.table-pill').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(filter) || (filter === 'all' && btn.textContent.toLowerCase().includes('all'))) {
+          btn.classList.add('active');
+        }
+      });
+      renderLiveDataTable();
+    }
+
+    // Handle Quick Scan on Home
+    let quickScanMode = 'profile';
+
+    function setQuickScanMode(mode) {
+      quickScanMode = mode;
+      const tabProfile = document.getElementById('tabProfile');
+      const tabVideo = document.getElementById('tabVideo');
+      const targetInput = document.getElementById('quickTarget');
+      const platformSelect = document.getElementById('quickPlatform');
+      const submitBtn = document.getElementById('btnQuickSubmit');
+
+      if (mode === 'video') {
+        tabProfile.classList.remove('active');
+        tabVideo.classList.add('active');
+        platformSelect.style.display = 'none';
+        targetInput.placeholder = 'Upload or specify video filename (e.g. clip.mp4)...';
+        submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Go to Video Analyzer';
+      } else {
+        tabVideo.classList.remove('active');
+        tabProfile.classList.add('active');
+        platformSelect.style.display = 'block';
+        targetInput.placeholder = 'Enter username (e.g. @username) or profile URL...';
+        submitBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Analyze Now';
+      }
+    }
+
+    function handleQuickScan(e) {
+      e.preventDefault();
+      if (quickScanMode === 'video') {
+        window.location.href = 'analyze-video.html';
+        return;
+      }
+
+      const target = document.getElementById('quickTarget').value.trim();
+      const platform = document.getElementById('quickPlatform').value;
+      if (!target) return;
+
+      // Save to recent history for demo completeness
+      const current = getStoredHistory();
+      const newEntry = {
+        id: Date.now().toString(),
+        type: "profile",
+        target: target.startsWith('@') ? target : '@' + target.replace(/^https?:\/\/(www\.)?[^\/]+\//, ''),
+        platform: platform,
+        result: "Trusted",
+        score: Math.floor(Math.random() * 20) + 78,
+        date: "Just now"
+      };
+      current.unshift(newEntry);
+      localStorage.setItem("sma_analysis_history", JSON.stringify(current));
+
+      window.location.href = `analyze-profile.html?url=${encodeURIComponent(target)}&platform=${encodeURIComponent(platform)}`;
+    }
+
+    // Helper: Escape HTML
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Navigation active link updater on scroll
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 120;
+      const sections = [
+        { id: 'home', navId: 'navHome' },
+        { id: 'live-data', navId: 'navLiveData' },
+        { id: 'features', navId: 'navFeatures' },
+        { id: 'how-it-works', navId: 'navHow' },
+        { id: 'contact', navId: 'navContact' }
+      ];
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sec = document.getElementById(sections[i].id);
+        if (sec && sec.offsetTop <= scrollPos) {
+          document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+          const activeNav = document.getElementById(sections[i].navId);
+          if (activeNav) activeNav.classList.add('active');
+          break;
+        }
+      }
+    });
+
+    // Function to scroll smoothly to Profile Analyzer section and focus it
+    function scrollToProfileSection() {
+      const profileSection = document.getElementById('profile-section');
+      if (profileSection) {
+        const navHeight = document.querySelector('nav').offsetHeight || 75;
+        const targetPos = profileSection.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+
+        // Ensure profile scan tab is selected
+        setQuickScanMode('profile');
+
+        // Add visual pulse glow and focus target input
+        profileSection.classList.add('highlight-pulse');
+        setTimeout(() => {
+          profileSection.classList.remove('highlight-pulse');
+          const input = document.getElementById('quickTarget');
+          if (input) input.focus();
+        }, 600);
+
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        document.getElementById('navHome').classList.add('active');
+        history.replaceState(null, null, 'home.html#profile-section');
+      }
+    }
+
+    // Attach Home button in header section to scroll down to the profile section
+    document.getElementById('navHome').addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToProfileSection();
+    });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      initHeroChart();
+      renderHeroRecentActivity();
+      renderLiveDataTable();
+
+      // If page was loaded with #profile-section hash, auto-scroll to it
+      if (window.location.hash === '#profile-section') {
+        setTimeout(scrollToProfileSection, 350);
+      }
+    });
+  </script>
+</body>
+</html>

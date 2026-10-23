@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Analysis Results - Social Media Analyzer</title>
+    <link rel="stylesheet" href="analyze-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1.5 Second simulated AI Scan overlay -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="scanner">
+            <i class="fas fa-brain scanner-icon"></i>
+        </div>
+        <h2>Analyzing Profile...</h2>
+        <p>Running fake detection & authenticity models</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" style="display: none;" id="mainContainer">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <a href="profileanalyzer.html" class="back-link" style="margin-bottom: 0;">
+                <i class="fa-solid fa-arrow-left"></i> Back to Analyzer
+            </a>
+            <a href="home.html#profile-section" class="home-link" style="text-decoration: none; color: #3b82f6; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-family: 'Inter', sans-serif;" title="Return to Home Profile Section">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+        </div>
+
+        <!-- Report Card -->
+        <div class="report-card">
+            
+            <!-- Header Row: User Info and Verification Badge -->
+            <div class="header-row">
+                <div class="user-profile">
+                    <div class="avatar-wrapper">
+                        <!-- We use a premium Unsplash face or dynamic fallback -->
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="User Avatar" class="avatar" id="userAvatar">
+                        <div class="platform-badge" id="platformBadge">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <h2 id="displayUsername">@username</h2>
+                        <p id="displayPlatform">Instagram Profile</p>
+                    </div>
+                </div>
+                
+                <div class="status-box" id="statusBox">
+                    <i class="fas fa-check-circle" id="statusIcon"></i>
+                    <div class="status-info">
+                        <span class="status-title" id="statusTitle">Trusted</span>
+                        <span class="status-desc" id="statusDesc">This profile looks authentic.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Row (Trust Score, Fake Prob, Engagement) -->
+            <div class="metrics-row">
+                <div class="metric-card">
+                    <div class="metric-label">Trust Score</div>
+                    <div class="metric-value" id="trustScoreVal">85%</div>
+                    <div class="metric-sub" id="trustScoreSub">High Trust</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Fake Probability</div>
+                    <div class="metric-value" id="fakeProbVal">15%</div>
+                    <div class="metric-sub" id="fakeProbSub">Low Risk</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Engagement Rate</div>
+                    <div class="metric-value" id="engagementVal" style="color: #8b5cf6;">6.8%</div>
+                    <div class="metric-sub" id="engagementSub" style="color: #8b5cf6;">Good</div>
+                </div>
+            </div>
+
+            <!-- Risk Indicators Checklist -->
+            <div class="risk-section">
+                <h3 class="section-title">Risk Indicators</h3>
+                <div class="risk-grid" id="riskGrid">
+                    <!-- Dynamic Checklist items -->
+                </div>
+            </div>
+
+            <!-- AI Recommendation Box -->
+            <div class="recommendation-box" id="recommendationBox">
+                <i class="fas fa-lightbulb" id="recIcon"></i>
+                <div class="recommendation-content">
+                    <h4 id="recTitle">AI Recommendation</h4>
+                    <p id="recDesc">This profile appears to be authentic. Continue monitoring for any unusual activity.</p>
+                </div>
+            </div>
+
+            <!-- Uncertainty & Missing Signals (Step 11 & Profile Analyzer Spec) -->
+            <div class="uncertainty-box" id="uncertaintyBox" style="background: #f8fafc; border-left: 4px solid #6366f1; padding: 14px 18px; border-radius: 8px; margin-top: 20px;">
+                <div style="display:flex; align-items:center; gap:8px; font-weight:700; color:#1e293b;">
+                    <i class="fas fa-shield-halved" style="color: #6366f1;"></i>
+                    <span>Signal Coverage & Uncertainty Rating: <span id="uncertaintyLevel" style="color: #6366f1;">Medium</span></span>
+                </div>
+                <p id="uncertaintyNotes" style="font-size: 12.5px; color: #475569; margin: 6px 0 0 0; line-height: 1.5;">
+                    A profile risk score is a statistical signal, NOT proof that an account is fake.
+                </p>
+                <div style="margin-top: 8px; font-size: 12px; font-weight: 600; color: #64748b;">Missing Data / Private Boundaries:</div>
+                <ul id="missingSignalsList" style="font-size: 12px; color: #64748b; margin: 4px 0 0 18px; padding: 0; line-height: 1.4;">
+                    <li>Private messages and direct email associations are restricted per platform privacy rules.</li>
+                </ul>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions-row" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+                <a href="" id="detailedReportBtn" class="btn btn-primary" style="background: #2563eb; width: 100%; display: block; border: none; padding: 14px; border-radius: 10px; color: white; font-weight: 700; text-align: center; text-decoration: none; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.15); transition: background 0.3s;">
+                    <i class="fa-solid fa-file-invoice"></i> View Detailed Report
+                </a>
+                <div style="display: flex; gap: 12px; width: 100%;">
+                    <a href="profileanalyzer.html" class="btn btn-secondary" style="flex: 1; text-align: center; background: #e2e8f0; color: #475569; padding: 12px; border-radius: 10px; font-weight: 700; text-decoration: none;">Analyze Another</a>
+                    <a href="dashboard.html" class="btn btn-secondary" style="flex: 1; text-align: center; background: #e2e8f0; color: #475569; padding: 12px; border-radius: 10px; font-weight: 700; text-decoration: none;">Dashboard</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Script to dynamically handle loading and set inputs -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Parse URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const rawUrl = params.get('url') || "";
+            const platform = params.get('platform') || "Instagram";
+
+            // Extract username from profile URL
+            let username = "@username";
+            if (rawUrl) {
+                // If it's a link, try to parse username
+                try {
+                    let cleanedUrl = rawUrl.trim();
+                    if (!/^https?:\/\//i.test(cleanedUrl)) {
+                        cleanedUrl = 'https://' + cleanedUrl;
+                    }
+                    const urlObj = new URL(cleanedUrl);
+                    // Extract path, filter out empty parts
+                    const parts = urlObj.pathname.split('/').filter(Boolean);
+                    if (parts.length > 0) {
+                        username = "@" + parts[0];
+                    } else {
+                        username = "@" + urlObj.hostname;
+                    }
+                } catch (e) {
+                    // Fallback to raw string if parsing fails
+                    username = rawUrl.startsWith('@') ? rawUrl : "@" + rawUrl;
+                }
+            }
+
+            // Limit length of username to look clean
+            if (username.length > 25) {
+                username = username.substring(0, 22) + "...";
+            }
+
+            // Update UI elements
+            document.getElementById('displayUsername').textContent = username;
+            document.getElementById('displayPlatform').textContent = platform + " Profile";
+
+            // Update Platform icon inside badge
+            const badge = document.getElementById('platformBadge');
+            badge.className = "platform-badge " + platform.toLowerCase();
+            let iconClass = "fa-instagram";
+            if (platform.toLowerCase() === "facebook") iconClass = "fa-facebook";
+            else if (platform.toLowerCase() === "x" || platform.toLowerCase() === "x (twitter)" || platform.toLowerCase() === "twitter") iconClass = "fa-x-twitter";
+            else if (platform.toLowerCase() === "tiktok") iconClass = "fa-tiktok";
+            else if (platform.toLowerCase() === "linkedin") iconClass = "fa-linkedin";
+
+            badge.innerHTML = `<i class="fa-brands ${iconClass}"></i>`;
+
+            // Adjust mock images slightly based on gender-neutral or random choice for fun
+            const avatars = [
+                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80"
+            ];
+            // Consistent index based on username string
+            let sum = 0;
+            for(let i=0; i<username.length; i++) sum += username.charCodeAt(i);
+            const avatarUrl = avatars[sum % avatars.length];
+            document.getElementById('userAvatar').src = avatarUrl;
+
+            // Update detailed report button href
+            const detailedReportBtn = document.getElementById('detailedReportBtn');
+            detailedReportBtn.href = `profile-detailed-report.html?url=${encodeURIComponent(rawUrl)}&platform=${encodeURIComponent(platform)}`;
+
+            // Check if backend API result is available
+            let apiData = null;
+            const storedApi = sessionStorage.getItem("profileAnalysisResult");
+            if (storedApi) {
+                try { apiData = JSON.parse(storedApi); } catch(e) {}
+            }
+
+            // Generate deterministic score matching default history if applicable
+            let score;
+            if (apiData && apiData.trust_score !== undefined) {
+                score = apiData.trust_score;
+                if (apiData.report_id) {
+                    detailedReportBtn.href = `profile-detailed-report.html?id=${apiData.report_id}&url=${encodeURIComponent(rawUrl)}&platform=${encodeURIComponent(platform)}`;
+                }
+            } else if (username === "@username") {
+                score = 85;
+            } else if (username === "@another_user") {
+                score = 70;
+            } else if (username === "@user_test") {
+                score = 45;
+            } else {
+                score = 35 + (sum % 61);
+            }
+            const fakeProbability = apiData ? apiData.risk_score : (100 - score);
+            const engagementRate = ((sum % 80) / 10 + 1).toFixed(1) + "%";
+
+            // Hydrate Uncertainty & Missing Signals from API
+            if (apiData) {
+                if (apiData.uncertainty) {
+                    document.getElementById('uncertaintyLevel').textContent = apiData.uncertainty.level || "Medium";
+                    document.getElementById('uncertaintyNotes').textContent = apiData.uncertainty.notes || "";
+                }
+                if (apiData.missing_data_notes && apiData.missing_data_notes.length > 0) {
+                    const listEl = document.getElementById('missingSignalsList');
+                    listEl.innerHTML = apiData.missing_data_notes.map(n => `<li>${n}</li>`).join("");
+                }
+            }
+
+            // Populate Trust Score metrics
+            const trustScoreVal = document.getElementById('trustScoreVal');
+            const trustScoreSub = document.getElementById('trustScoreSub');
+            trustScoreVal.textContent = score + "%";
+            
+            const fakeProbVal = document.getElementById('fakeProbVal');
+            const fakeProbSub = document.getElementById('fakeProbSub');
+            fakeProbVal.textContent = fakeProbability + "%";
+
+            const engagementVal = document.getElementById('engagementVal');
+            const engagementSub = document.getElementById('engagementSub');
+            engagementVal.textContent = engagementRate;
+
+            // Handle thresholds
+            const statusBox = document.getElementById('statusBox');
+            const statusIcon = document.getElementById('statusIcon');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusDesc = document.getElementById('statusDesc');
+
+            const recBox = document.getElementById('recommendationBox');
+            const recIcon = document.getElementById('recIcon');
+            const recTitle = document.getElementById('recTitle');
+            const recDesc = document.getElementById('recDesc');
+
+            let riskItemsHTML = "";
+
+            if (score >= 80) {
+                statusBox.className = "status-box"; // default success
+                statusIcon.className = "fas fa-check-circle";
+                statusTitle.textContent = "Trusted";
+                statusDesc.textContent = "This profile looks authentic.";
+
+                trustScoreVal.className = "metric-value success";
+                trustScoreSub.className = "metric-sub success";
+                trustScoreSub.textContent = "High Trust";
+
+                fakeProbVal.className = "metric-value success";
+                fakeProbSub.className = "metric-sub success";
+                fakeProbSub.textContent = "Low Risk";
+
+                engagementSub.textContent = "Good";
+
+                recBox.className = "recommendation-box";
+                recIcon.className = "fas fa-lightbulb";
+                recTitle.textContent = "AI Recommendation";
+                recDesc.textContent = "This profile appears to be authentic. Continue monitoring for any unusual activity.";
+
+                riskItemsHTML = `
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profile Picture</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No issues found</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-at"></i>
+                            <span>Username</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No issues found</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-address-card"></i>
+                            <span>Bio & Info</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No issues found</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-users"></i>
+                            <span>Followers Quality</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Good</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Activity Pattern</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Normal</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-heart"></i>
+                            <span>Engagement</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Good</span>
+                        </div>
+                    </div>
+                `;
+            } else if (score >= 50) {
+                statusBox.className = "status-box warning";
+                statusIcon.className = "fas fa-exclamation-triangle";
+                statusTitle.textContent = "Low Risk";
+                statusDesc.textContent = "Some minor risk signals detected.";
+
+                trustScoreVal.className = "metric-value";
+                trustScoreVal.style.color = "var(--warning)";
+                trustScoreSub.className = "metric-sub";
+                trustScoreSub.style.color = "var(--warning)";
+                trustScoreSub.textContent = "Moderate Trust";
+
+                fakeProbVal.className = "metric-value";
+                fakeProbVal.style.color = "var(--warning)";
+                fakeProbSub.className = "metric-sub";
+                fakeProbSub.style.color = "var(--warning)";
+                fakeProbSub.textContent = "Medium Risk";
+
+                engagementSub.textContent = "Abnormal";
+
+                recBox.className = "recommendation-box warning";
+                recIcon.className = "fas fa-circle-exclamation";
+                recTitle.textContent = "AI Recommendation";
+                recDesc.textContent = "Profile shows minor discrepancies (e.g. erratic activity and potential stock photo usage). View detailed report for more information.";
+
+                riskItemsHTML = `
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profile Picture</span>
+                        </div>
+                        <div class="risk-right warning">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <span>Stock photo?</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-at"></i>
+                            <span>Username</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No issues found</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-address-card"></i>
+                            <span>Bio & Info</span>
+                        </div>
+                        <div class="risk-right warning">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <span>Affiliate links</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-users"></i>
+                            <span>Followers Quality</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Good</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Activity Pattern</span>
+                        </div>
+                        <div class="risk-right warning">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <span>Erratic</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-heart"></i>
+                            <span>Engagement</span>
+                        </div>
+                        <div class="risk-right">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Normal</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                statusBox.className = "status-box danger";
+                statusIcon.className = "fas fa-ban";
+                statusTitle.textContent = "High Risk";
+                statusDesc.textContent = "Highly likely to be a bot or fake profile.";
+
+                trustScoreVal.className = "metric-value";
+                trustScoreVal.style.color = "var(--danger)";
+                trustScoreSub.className = "metric-sub";
+                trustScoreSub.style.color = "var(--danger)";
+                trustScoreSub.textContent = "Low Trust";
+
+                fakeProbVal.className = "metric-value";
+                fakeProbVal.style.color = "var(--danger)";
+                fakeProbSub.className = "metric-sub";
+                fakeProbSub.style.color = "var(--danger)";
+                fakeProbSub.textContent = "High Risk";
+
+                engagementSub.textContent = "Very Low";
+
+                recBox.className = "recommendation-box danger";
+                recIcon.className = "fas fa-triangle-exclamation";
+                recTitle.textContent = "AI Recommendation";
+                recDesc.textContent = "CRITICAL WARNING: This account is flagged as a bot. High concentration of bot followers and machine-generated bio content detected.";
+
+                riskItemsHTML = `
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profile Picture</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>AI Generated Face</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-at"></i>
+                            <span>Username</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>High Entropy</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-address-card"></i>
+                            <span>Bio & Info</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>Spam Pattern</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-users"></i>
+                            <span>Followers Quality</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>Bot-like (90%+)</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Activity Pattern</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>Spam Frequency</span>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-left">
+                            <i class="fas fa-heart"></i>
+                            <span>Engagement</span>
+                        </div>
+                        <div class="risk-right danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <span>Low quality</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('riskGrid').innerHTML = riskItemsHTML;
+
+            // Push profile to session storage and/or local storage history so it registers
+            try {
+                const currentHistory = JSON.parse(localStorage.getItem("sma_analysis_history")) || [];
+                // Add if not already present
+                if (!currentHistory.some(item => item.target === username)) {
+                    currentHistory.unshift({
+                        id: Date.now().toString(),
+                        type: "profile",
+                        target: username,
+                        platform: platform,
+                        result: (score >= 80 ? "Trusted" : (score >= 50 ? "Low Risk" : "High Risk")),
+                        score: score,
+                        date: "Just now"
+                    });
+                    localStorage.setItem("sma_analysis_history", JSON.stringify(currentHistory));
+                }
+            } catch (e) {
+                console.error("Failed to update local storage history:", e);
+            }
+
+            // 2. Simulated AI Scan loader animation: 1.5 seconds
+            setTimeout(() => {
+                const overlay = document.getElementById('loaderOverlay');
+                const container = document.getElementById('mainContainer');
+                
+                overlay.style.opacity = 0;
+                overlay.style.visibility = 'hidden';
+                
+                container.style.display = 'block';
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>

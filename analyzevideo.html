@@ -1,0 +1,329 @@
+
+          
+          
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Analysis Results - Social Media Analyzer</title>
+    <link rel="stylesheet" href="analyze-video.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1.5 Second simulated AI Scan overlay -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="scanner">
+            <i class="fas fa-brain scanner-icon"></i>
+        </div>
+        <h2>Analyzing Video...</h2>
+        <p>Inspecting audio consistency, facial meshes, and compression metadata</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" style="display: none;" id="mainContainer">
+        
+        <a href="analyze-video.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Upload
+        </a>
+
+        <!-- Report Card -->
+        <div class="report-card">
+            
+            <!-- Top Split Layout: Video Player + Status Box -->
+            <div class="top-split">
+                <div>
+                    <div class="video-container">
+                        <!-- Video element will play user's uploaded file or fallback -->
+                        <video id="reportVideo" controls autoplay muted loop playsinline></video>
+                    </div>
+                    <div class="video-title-bar" id="videoTitle">video.mp4</div>
+                </div>
+
+                <div class="status-box" id="statusBox">
+                    <div class="status-badge" id="statusBadge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span id="statusBadgeText">Authentic</span>
+                    </div>
+                    <div class="status-text" id="statusDescription">
+                        This video is truly real. No deepfake manipulation detected.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Row (Authenticity, Deepfake, Manipulation) -->
+            <div class="metrics-row">
+                <div class="metric-card">
+                    <div class="metric-label">Authenticity Score</div>
+                    <div class="metric-value success" id="authenticityScoreVal">92%</div>
+                    <div class="metric-sub success" id="authenticityScoreSub">Very High</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Deepfake Probability</div>
+                    <div class="metric-value success" id="deepfakeProbVal">8%</div>
+                    <div class="metric-sub success" id="deepfakeProbSub">Very Low</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Manipulation</div>
+                    <div class="status-dot-wrapper">
+                        <span class="status-dot" id="manipulationDot"></span>
+                        <span id="manipulationText">Not Detected</span>
+                    </div>
+                    <div class="metric-sub success" style="margin-top: 4px;" id="manipulationSub">Clean</div>
+                </div>
+            </div>
+
+            <!-- OpenCV Metadata Row (Step 8 Module 1) -->
+            <div class="details-section" style="margin-top: 20px;">
+                <h3 class="section-title"><i class="fas fa-video"></i> OpenCV Video Stream Metadata</h3>
+                <div class="details-grid" id="metadataGrid">
+                    <div class="details-item">
+                        <div class="details-left">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration & FPS</span>
+                        </div>
+                        <div class="details-right status-ok" id="metaDurationFps">
+                            <span>--</span>
+                        </div>
+                    </div>
+
+                    <div class="details-item">
+                        <div class="details-left">
+                            <i class="fas fa-film"></i>
+                            <span>Frame Count</span>
+                        </div>
+                        <div class="details-right status-ok" id="metaFrameCount">
+                            <span>--</span>
+                        </div>
+                    </div>
+
+                    <div class="details-item">
+                        <div class="details-left">
+                            <i class="fas fa-expand"></i>
+                            <span>Resolution & Codec</span>
+                        </div>
+                        <div class="details-right status-ok" id="metaResolution">
+                            <span>--</span>
+                        </div>
+                    </div>
+
+                    <div class="details-item">
+                        <div class="details-left">
+                            <i class="fas fa-file-shield"></i>
+                            <span>File Integrity</span>
+                        </div>
+                        <div class="details-right status-ok" id="metaIntegrity">
+                            <span>Decodable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duplicate / Reuse Check (Step 8 Module 3) -->
+            <div class="details-section" style="margin-top: 20px;">
+                <h3 class="section-title"><i class="fas fa-clone"></i> Duplicate & Reuse Verification (Perceptual Hash)</h3>
+                <div class="details-item" style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px;">
+                    <div class="details-left">
+                        <i class="fas fa-fingerprint"></i>
+                        <span id="duplicateStatusTitle">Reference Set Status</span>
+                    </div>
+                    <div class="details-right" id="duplicateStatusBadge">
+                        <span id="duplicateBadgeText">No Reference Data</span>
+                    </div>
+                </div>
+                <p id="duplicateNotes" style="font-size: 13px; color: #64748b; margin-top: 8px;">
+                    Perceptual hashes are matched against the local reference video library.
+                </p>
+            </div>
+
+            <!-- AI Limitations Notice (Step 11 & Milestone 1 Requirements) -->
+            <div class="recommendation-box" id="aiLimitationBox" style="background: #f8fafc; border-left: 4px solid #6366f1; margin-top: 20px;">
+                <i class="fas fa-triangle-exclamation" style="color: #6366f1;"></i>
+                <div class="recommendation-content">
+                    <h4 style="color: #1e293b;">Detector Model Limitations</h4>
+                    <p id="aiLimitationsText" style="font-size: 12.5px; color: #475569; margin-top: 4px;">
+                        AI video probability is an estimated likelihood based on temporal edge variance and sensor grain heuristics, never an absolute proof of falsehood.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions-row" style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px;">
+                <a href="detailed-report.html" id="detailedReportBtn" class="btn btn-primary" style="background: #2563eb; width: 100%; display: block; border: none; padding: 12px; border-radius: 10px; color: white; font-weight: 700; text-align: center; text-decoration: none; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.15); transition: background 0.3s;">
+                    <i class="fa-solid fa-file-invoice"></i> View Detailed Report
+                </a>
+                <div style="display: flex; gap: 12px; width: 100%;">
+                    <a href="analyze-video.html" class="btn btn-secondary" style="flex: 1; background: #e2e8f0; color: #475569; padding: 12px; border-radius: 10px; font-weight: 700; text-align: center; text-decoration: none;">Analyze Another</a>
+                    <a href="dashboard.html" class="btn btn-secondary" style="flex: 1; background: #e2e8f0; color: #475569; padding: 12px; border-radius: 10px; font-weight: 700; text-align: center; text-decoration: none;">Dashboard</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Script to dynamically handle video loading, backend data hydration, and overlay -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const reportVideo = document.getElementById("reportVideo");
+            const videoTitle = document.getElementById("videoTitle");
+
+            const storedVideoUrl = sessionStorage.getItem("uploadedVideoUrl");
+            const storedVideoName = sessionStorage.getItem("uploadedVideoName");
+
+            if (storedVideoUrl) {
+                reportVideo.src = storedVideoUrl;
+                videoTitle.textContent = storedVideoName || "uploaded-video.mp4";
+            } else {
+                reportVideo.src = "https://assets.mixkit.co/videos/preview/mixkit-man-holding-smartphone-in-his-hand-40546-large.mp4";
+                videoTitle.textContent = "sample-clip.mp4 (Sample)";
+            }
+
+            // Check if we have an API result or report ID
+            let apiResult = null;
+            const urlParams = new URLSearchParams(window.location.search);
+            const reportId = urlParams.get("id") || sessionStorage.getItem("lastVideoReportId");
+
+            const storedResult = sessionStorage.getItem("videoAnalysisResult");
+            if (storedResult) {
+                try {
+                    apiResult = JSON.parse(storedResult);
+                } catch(e) {}
+            }
+
+            if (!apiResult && reportId) {
+                try {
+                    const res = await fetch(`http://127.0.0.1:8000/api/reports/${reportId}`);
+                    if (res.ok) {
+                        const json = await res.json();
+                        apiResult = json.data;
+                    }
+                } catch(e) {
+                    console.warn("Could not fetch remote report:", e);
+                }
+            }
+
+            if (apiResult) {
+                hydrateResults(apiResult);
+            }
+
+            // Simulated scanning loading sequence
+            setTimeout(() => {
+                const overlay = document.getElementById('loaderOverlay');
+                const container = document.getElementById('mainContainer');
+                
+                overlay.style.opacity = 0;
+                overlay.style.visibility = 'hidden';
+                container.style.display = 'block';
+                
+                reportVideo.play().catch(e => {
+                    console.log("Autoplay blocked, waiting for user interaction.", e);
+                });
+            }, 1200);
+        });
+
+        function hydrateResults(data) {
+            const authScore = Math.round(data.authenticity_score ?? 90);
+            const deepfakeProb = Math.round(data.deepfake_probability ?? (100 - authScore));
+            const isAuthentic = authScore >= 60;
+
+            document.getElementById("authenticityScoreVal").textContent = authScore + "%";
+            document.getElementById("deepfakeProbVal").textContent = deepfakeProb + "%";
+
+            const authSub = document.getElementById("authenticityScoreSub");
+            const deepfakeSub = document.getElementById("deepfakeProbSub");
+            const statusBadge = document.getElementById("statusBadge");
+            const statusBadgeText = document.getElementById("statusBadgeText");
+            const statusDesc = document.getElementById("statusDescription");
+            const manipText = document.getElementById("manipulationText");
+            const manipDot = document.getElementById("manipulationDot");
+
+            if (isAuthentic) {
+                authSub.textContent = "High Authenticity";
+                authSub.className = "metric-sub success";
+                deepfakeSub.textContent = "Low Likelihood";
+                deepfakeSub.className = "metric-sub success";
+                statusBadgeText.textContent = data.verdict || "Authentic";
+                statusDesc.textContent = data.summary || "This video shows natural temporal consistency and sensor grain profiles.";
+                manipText.textContent = "Not Detected";
+                manipDot.style.background = "#10b981";
+            } else {
+                authSub.textContent = "Low";
+                authSub.className = "metric-sub danger";
+                deepfakeSub.textContent = "Elevated";
+                deepfakeSub.className = "metric-sub danger";
+                statusBadgeText.textContent = data.verdict || "Elevated AI";
+                statusBadge.style.background = "#fef2f2";
+                statusBadge.style.color = "#ef4444";
+                statusDesc.textContent = data.summary || "Detectable spatial smoothing or irregular frame cadence detected.";
+                manipText.textContent = "Detected";
+                manipDot.style.background = "#ef4444";
+            }
+
+            // OpenCV Metadata
+            if (data.metadata) {
+                const meta = data.metadata;
+                document.getElementById("metaDurationFps").textContent = `${meta.duration || 0}s @ ${meta.fps || 0} FPS`;
+                document.getElementById("metaFrameCount").textContent = `${meta.frame_count || 0} frames (${meta.coverage?.sampled_frames || 0} sampled)`;
+                document.getElementById("metaResolution").textContent = `${meta.resolution || "N/A"} (${meta.codec || "Auto"})`;
+                document.getElementById("metaIntegrity").textContent = meta.integrity?.complete_stream ? "Stream Verified" : "Header Valid";
+            }
+
+            // Duplicate Detection
+            if (data.duplicate_analysis) {
+                const dup = data.duplicate_analysis;
+                const dupBadge = document.getElementById("duplicateStatusBadge");
+                const dupText = document.getElementById("duplicateBadgeText");
+                const dupNotes = document.getElementById("duplicateNotes");
+
+                if (!dup.comparison_data_exists) {
+                    dupText.textContent = "No Reference Set";
+                    dupNotes.textContent = "No reference videos in database to compare against. Upload reference media to enable reuse checks.";
+                } else if (dup.is_duplicate) {
+                    dupText.textContent = `Match (${dup.similarity_score}%)`;
+                    dupBadge.className = "details-right status-danger";
+                    dupNotes.textContent = `High similarity detected against '${dup.matches?.[0]?.title || "Reference Video"}' (${dup.similarity_score}%).`;
+                } else {
+                    dupText.textContent = "Unique (No Match)";
+                    dupBadge.className = "details-right status-ok";
+                    dupNotes.textContent = `No perceptual hash duplicates found among ${dup.reference_count} registered reference videos.`;
+                }
+            }
+
+            // AI Limitations
+            if (data.ai_analysis?.limitations) {
+                document.getElementById("aiLimitationsText").textContent = data.ai_analysis.limitations.join(" • ");
+            }
+
+            // Update Detailed Report link
+            if (data.report_id) {
+                document.getElementById("detailedReportBtn").href = `detailed-report.html?id=${data.report_id}`;
+            }
+
+            // Save to browser history
+            try {
+                const history = JSON.parse(localStorage.getItem("sma_analysis_history")) || [];
+                const targetName = data.filename || "Video Analysis";
+                if (!history.some(h => h.id === data.report_id)) {
+                    history.unshift({
+                        id: data.report_id || Date.now().toString(),
+                        type: "video",
+                        target: targetName,
+                        result: data.verdict || "Authentic",
+                        score: authScore,
+                        date: "Just now"
+                    });
+                    localStorage.setItem("sma_analysis_history", JSON.stringify(history));
+                }
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>
+
+
+       

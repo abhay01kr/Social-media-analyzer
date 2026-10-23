@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Analyzer - Social Media Safety</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="profileanalyzer.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      margin: 0;
+      padding: 0;
+    }
+    .content-page {
+      max-width: 780px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 35px 40px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e2e8f0;
+    }
+    .back-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    .back-nav a {
+      text-decoration: none;
+      color: #4f46e5;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .back-nav a:hover {
+      color: #3730a3;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 8px 0;
+    }
+    .subtitle {
+      color: #64748b;
+      font-size: 15px;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 8px;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px 16px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #f8fafc;
+    }
+    textarea:focus, input[type="text"]:focus {
+      border-color: #4f46e5;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0 25px 0;
+    }
+    .feature-chip {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #334155;
+    }
+    .feature-chip i {
+      color: #4f46e5;
+      font-size: 16px;
+    }
+    .analyze-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+    .analyze-btn:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+    .analyze-btn:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Results Card */
+    .results-card {
+      margin-top: 30px;
+      border-top: 2px dashed #e2e8f0;
+      padding-top: 25px;
+      display: none;
+    }
+    .score-banner {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .score-big {
+      font-size: 38px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .score-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-safe { background: #dcfce7; color: #15803d; }
+    .badge-warning { background: #fef3c7; color: #b45309; }
+    .badge-danger { background: #fee2e2; color: #b91c1c; }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .metric-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .metric-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .metric-val {
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .metric-desc {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+    .pdf-btn {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      color: #0f172a;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .pdf-btn:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content-page">
+    <div class="back-nav">
+      <a href="analyzer.html"><i class="fa-solid fa-arrow-left"></i> Back to Analyzer</a>
+      <a href="dashboard.html"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+    </div>
+
+    <h1>Content Safety & Threat Analyzer</h1>
+    <p class="subtitle">
+      Inspect posts, comments, and messages for spam, toxicity, hate speech, and NSFW violations using Member 4 AI pipelines.
+    </p>
+
+    <div class="form-group">
+      <label for="author">Author Username (Optional)</label>
+      <input type="text" id="author" placeholder="@username">
+    </div>
+
+    <div class="form-group">
+      <label for="contentText">Text Content to Analyze *</label>
+      <textarea id="contentText" rows="4" placeholder="Paste or type social media text, comment, or message here..."></textarea>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-chip"><i class="fa-solid fa-envelope-open-text"></i> Spam Detection</div>
+      <div class="feature-chip"><i class="fa-solid fa-triangle-exclamation"></i> Toxic Comments</div>
+      <div class="feature-chip"><i class="fa-solid fa-handcuffs"></i> Hate Speech Detection</div>
+      <div class="feature-chip"><i class="fa-solid fa-eye-slash"></i> NSFW & Adult Content</div>
+    </div>
+
+    <button class="analyze-btn" id="analyzeBtn" onclick="runContentAnalysis()">
+      <i class="fa-solid fa-shield-halved"></i> Analyze Content Safety
+    </button>
+
+    <!-- Results Section -->
+    <div class="results-card" id="resultsCard">
+      <div class="score-banner">
+        <div>
+          <div class="score-label">Overall Safety Score</div>
+          <div class="score-big" id="overallScore">95%</div>
+        </div>
+        <div style="text-align: right;">
+          <div class="score-label" style="margin-bottom: 6px;">Safety Verdict</div>
+          <span class="badge badge-safe" id="verdictBadge">Safe</span>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <!-- Spam -->
+        <div class="metric-box">
+          <div class="metric-header">
+            <span class="metric-title"><i class="fa-solid fa-paper-plane" style="color: #6366f1;"></i> Spam Score</span>
+            <span class="metric-val" id="spamVal">0%</span>
+          </div>
+          <div class="metric-desc" id="spamDesc">No promotional or spam patterns detected.</div>
+        </div>
+
+        <!-- Toxicity -->
+        <div class="metric-box">
+          <div class="metric-header">
+            <span class="metric-title"><i class="fa-solid fa-face-angry" style="color: #f59e0b;"></i> Toxic Comments</span>
+            <span class="metric-val" id="toxicVal">0%</span>
+          </div>
+          <div class="metric-desc" id="toxicDesc">Clean language, no hostile attacks detected.</div>
+        </div>
+
+        <!-- Hate Speech -->
+        <div class="metric-box">
+          <div class="metric-header">
+            <span class="metric-title"><i class="fa-solid fa-ban" style="color: #ef4444;"></i> Hate Speech</span>
+            <span class="metric-val" id="hateVal">0%</span>
+          </div>
+          <div class="metric-desc" id="hateDesc">No discriminatory slurs or targeted harassment.</div>
+        </div>
+
+        <!-- NSFW -->
+        <div class="metric-box">
+          <div class="metric-header">
+            <span class="metric-title"><i class="fa-solid fa-radiation" style="color: #ec4899;"></i> NSFW Detection</span>
+            <span class="metric-val" id="nsfwVal">0%</span>
+          </div>
+          <div class="metric-desc" id="nsfwDesc">Content is safe for all audiences.</div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <span style="font-size: 13px; color: #64748b;" id="summaryText">Analysis complete.</span>
+        <button class="pdf-btn" id="downloadPdfBtn" onclick="downloadContentPdf()">
+          <i class="fa-solid fa-file-pdf" style="color: #dc2626;"></i> Download PDF Report
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentReportId = null;
+
+    async function runContentAnalysis() {
+      const text = document.getElementById("contentText").value.trim();
+      const author = document.getElementById("author").value.trim();
+      const btn = document.getElementById("analyzeBtn");
+      const resultsCard = document.getElementById("resultsCard");
+
+      if (!text) {
+        alert("Please enter text content to analyze.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Inspecting Content...';
+
+      try {
+        const res = await fetch("http://127.0.0.1:8000/analyze/content", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text: text,
+            author_username: author || null,
+            context: "post"
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          currentReportId = data.report_id;
+
+          document.getElementById("overallScore").textContent = data.overall_safety_score + "%";
+          
+          const badge = document.getElementById("verdictBadge");
+          badge.textContent = data.verdict_badge;
+          badge.className = "badge " + (data.verdict_badge === "High Risk" ? "badge-danger" : (data.verdict_badge === "Moderate Risk" ? "badge-warning" : "badge-safe"));
+
+          document.getElementById("spamVal").textContent = data.spam_detection.spam_score + "%";
+          document.getElementById("spamDesc").textContent = data.spam_detection.reasons.join("; ") || "Clean";
+
+          document.getElementById("toxicVal").textContent = data.toxic_comments.toxicity_score + "%";
+          document.getElementById("toxicDesc").textContent = data.toxic_comments.is_toxic ? ("Severity: " + data.toxic_comments.severity) : "No profanity or aggression";
+
+          document.getElementById("hateVal").textContent = data.hate_speech_detection.hate_speech_score + "%";
+          document.getElementById("hateDesc").textContent = data.hate_speech_detection.is_hate_speech ? ("Flagged: " + (data.hate_speech_detection.targeted_categories.join(", ") || "Hate speech")) : "No hate speech detected";
+
+          document.getElementById("nsfwVal").textContent = data.nsfw_detection.nsfw_score + "%";
+          document.getElementById("nsfwDesc").textContent = data.nsfw_detection.is_nsfw ? ("Severity: " + data.nsfw_detection.severity) : "Safe for work";
+
+          document.getElementById("summaryText").textContent = data.action_recommendation;
+          resultsCard.style.display = "block";
+          resultsCard.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          alert("Error analyzing content: " + res.statusText);
+        }
+      } catch (err) {
+        alert("Failed to connect to backend server at http://127.0.0.1:8000: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Analyze Content Safety';
+      }
+    }
+
+    async function downloadContentPdf() {
+      if (!currentReportId) {
+        alert("Please run an analysis first.");
+        return;
+      }
+      window.location.href = `http://127.0.0.1:8000/report/${currentReportId}/pdf`;
+    }
+  </script>
+</body>
+</html>

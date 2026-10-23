@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <div class="logo" onclick="window.location.href='home.html'" title="Social Media Analyzer"><i class="fa-solid fa-brain"></i></div>
+    <div class="nav-icon" onclick="window.location.href='home.html'" title="Home"><i class="fa-solid fa-house"></i></div>
+    <div class="nav-icon active" onclick="window.location.href='dashboard.html'" title="Dashboard"><i class="fa-solid fa-chart-simple"></i></div>
+    <div class="nav-icon" onclick="window.location.href='analyzer.html'" title="Analyzer"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+    <div class="nav-icon" onclick="window.location.href='history.html'" title="History"><i class="fa-solid fa-clock-rotate-left"></i></div>
+    <div class="nav-icon" onclick="window.location.href='notifications.html'" title="Notifications"><i class="fa-solid fa-bell"></i></div>
+    <div class="nav-icon" onclick="window.location.href='settings.html'" title="Settings"><i class="fa-solid fa-gear"></i></div>
+    <div class="nav-icon logout-icon" onclick="window.location.href='logout.html'" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="top-bar">
+      <h2>Dashboard Overview</h2>
+      <div class="top-right" style="display: flex; align-items: center; gap: 15px;">
+        <span class="icon" onclick="window.location.href='notifications.html'" style="cursor: pointer; font-size: 20px; color: #64748b;"><i class="fa-regular fa-bell"></i></span>
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&auto=format&fit=crop&q=80" alt="Profile" class="profile" onclick="window.location.href='settings.html'" style="cursor: pointer;">
+      </div>
+    </div>
+
+    <!-- 3 Cards Row -->
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-header">
+          <span>Total Analyses</span>
+          <span class="menu">⋮</span>
+        </div>
+        <div class="card-value">1,248</div>
+        <div class="card-change green">↑ +10% this week</div>
+      </div>
+
+      <div class="card center-card">
+        <div class="card-header">
+          <span>Trust Score</span>
+        </div>
+        <div class="circle-progress">
+          <div class="circle-inner">85%</div>
+        </div>
+        <div class="card-label">Trusted</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>Risk Level</span>
+        </div>
+        <div class="risk-status">
+          <span class="dot green"></span> Low Risk
+        </div>
+        <div class="card-sub">No immediate issues found</div>
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>Analysis Summary</h3>
+        <span>This Week ▼</span>
+      </div>
+      <canvas id="analysisChart"></canvas>
+    </div>
+
+    <!-- Quick Action Buttons -->
+    <div class="action-buttons" style="display:flex; gap:16px; margin-top:30px; justify-content:center; flex-wrap: wrap;">
+
+      <button onclick="window.location.href='profileanalyzer.html'"
+        style="padding:18px 36px; font-size:16px; font-weight:700; background:#4F46E5; color:white; border:none; border-radius:12px; cursor:pointer; display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-user"></i> Analyze Profile
+      </button>
+
+      <button onclick="window.location.href='analyze-video.html'"
+        style="padding:18px 36px; font-size:16px; font-weight:700; background:#10B981; color:white; border:none; border-radius:12px; cursor:pointer; display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-video"></i> Analyze Video
+      </button>
+
+      <button onclick="window.location.href='analyze-content.html'"
+        style="padding:18px 36px; font-size:16px; font-weight:700; background:#6366F1; color:white; border:none; border-radius:12px; cursor:pointer; display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-shield-halved"></i> Analyze Content
+      </button>
+
+    </div>
+    <div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        const ctx = document.getElementById('analysisChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+              label: '',
+              data: [20, 35, 28, 55, 70, 85, 95],
+              borderColor: '#22C55E',
+              backgroundColor: 'rgba(34, 197, 94, 0.15)',
+              borderWidth: 2.5,
+              tension: 0.5,
+              fill: true,
+              pointRadius: 0,
+              pointHoverRadius: 5
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: {
+                border: { display: false },
+                ticks: { color: '#94A3B8', font: { size: 12 } },
+                grid: { display: false }
+              },
+              y: {
+                border: { display: false },
+                ticks: { color: '#94A3B8', font: { size: 12 } },
+                grid: { color: 'rgba(148, 163, 184, 0.1)', drawBorder: false }
+              }
+            }
+          }
+        });
+      </script>
+
+      <style>
+        #analysisChart {
+          height: 180px !important;
+          width: 100% !important;
+        }
+      </style>
+      <script>
+        if (localStorage.getItem("pref_dark_mode") === "true") {
+          document.body.classList.add("dark-mode");
+        }
+
+        // Live dashboard data fetch from Member 5 /dashboard endpoint
+        async function fetchDashboardStats() {
+          try {
+            const res = await fetch("http://127.0.0.1:8000/dashboard");
+            if (res.ok) {
+              const data = await res.json();
+              
+              // Total Analyses
+              const totalEl = document.querySelector(".cards-row .card:nth-child(1) .card-value");
+              if (totalEl && data.total_analyses !== undefined) {
+                totalEl.textContent = data.total_analyses.toLocaleString();
+              }
+
+              // Trust Score
+              const scoreEl = document.querySelector(".circle-inner");
+              if (scoreEl && data.average_trust_score !== undefined) {
+                scoreEl.textContent = Math.round(data.average_trust_score) + "%";
+              }
+
+              // Risk Status
+              const statusLabel = document.querySelector(".card-label");
+              if (statusLabel) {
+                statusLabel.textContent = data.average_trust_score >= 70 ? "Trusted" : (data.average_trust_score >= 40 ? "Moderate" : "High Risk");
+              }
+            }
+          } catch (e) {
+            console.log("Using cached dashboard statistics");
+          }
+        }
+        document.addEventListener("DOMContentLoaded", fetchDashboardStats);
+      </script>
+</body>
+</html>               

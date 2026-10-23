@@ -1,0 +1,170 @@
+
+ 
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Video</title>
+
+    <link rel="stylesheet" href="analyzevideo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <a href="dashboard.html" class="back-link" style="margin-bottom: 0;">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <a href="home.html" class="home-link" style="text-decoration: none; color: #64748b; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-family: Arial, sans-serif;">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+        </div>
+
+        <div class="card">
+
+            <h1>Analyze Video</h1>
+            <p class="subtitle">
+                Upload a video to check authenticity and detect deepfakes
+            </p>
+
+            <!-- Upload Area -->
+            <div class="upload-box" onclick="document.getElementById('videoInput').click()">
+
+                <input type="file" id="videoInput" accept="video/*" hidden>
+
+                <div class="upload-content">
+
+                    <i class="fas fa-cloud-upload-alt"></i>
+
+                    <h3>Drag & Drop your video here</h3>
+
+                    <p>or Click to Browse</p>
+
+                    <span>
+                        Supports MP4, MOV, AVI (Max 500MB)
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- Video Preview -->
+            <div class="preview-section" id="previewSection">
+
+                <h3>Video Preview</h3>
+
+                <video id="videoPreview" controls>
+                </video>
+
+            </div>
+
+            <!-- Analysis Features -->
+            <div class="features">
+
+                <h3>What We Analyze</h3>
+
+                <div class="feature-grid">
+
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Deepfake Detection</span>
+                    </div>
+
+                    <div class="feature">
+                        <i class="fas fa-film"></i>
+                        <span>Frame Analysis</span>
+                    </div>
+
+                    <div class="feature">
+                        <i class="fas fa-database"></i>
+                        <span>Metadata Inspection</span>
+                    </div>
+
+                    <div class="feature">
+                        <i class="fas fa-volume-up"></i>
+                        <span>Audio Consistency</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="analyze-btn">
+                Analyze Video
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const videoInput = document.getElementById("videoInput");
+        const videoPreview = document.getElementById("videoPreview");
+        const previewSection = document.getElementById("previewSection");
+        const analyzeBtn = document.querySelector(".analyze-btn");
+
+        videoInput.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                videoPreview.src = url;
+                previewSection.style.display = "block";
+                sessionStorage.setItem("uploadedVideoUrl", url);
+                sessionStorage.setItem("uploadedVideoName", file.name);
+            }
+        });
+
+        analyzeBtn.addEventListener("click", async function() {
+            if (!videoInput.files || videoInput.files.length === 0) {
+                alert("Please select or upload a video file to proceed.");
+                return;
+            }
+
+            const file = videoInput.files[0];
+            analyzeBtn.disabled = true;
+            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing & Reading OpenCV Metadata...';
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/videos/analyze", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    sessionStorage.setItem("videoAnalysisResult", JSON.stringify(result));
+                    sessionStorage.setItem("lastVideoReportId", result.report_id);
+                    window.location.href = `analyzevideo.html?id=${result.report_id}`;
+                    return;
+                } else {
+                    const err = await response.json().catch(() => ({}));
+                    console.warn("Backend returned error:", err);
+                    alert("Backend error: " + (err.detail || "Could not analyze video. Proceeding with local preview."));
+                }
+            } catch (error) {
+                console.warn("FastAPI backend not reachable at http://127.0.0.1:8000, continuing with simulated preview:", error);
+            }
+
+            // Fallback if backend is not running
+            sessionStorage.removeItem("videoAnalysisResult");
+            window.location.href = "analyzevideo.html";
+        });
+    </script>
+</body>
+</html>
+    
+
+        
+         
+       
+         
+                   

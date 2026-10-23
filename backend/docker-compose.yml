@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Social Media Analyzer API Server
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sma_backend_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PROJECT_NAME=Social Media Analyzer
+      - DEBUG=False
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_DB_NAME=social_media_analyzer
+      - JWT_SECRET_KEY=sma-super-secret-jwt-key-2026-secure-token
+      - JWT_ALGORITHM=HS256
+      - JWT_ACCESS_TOKEN_EXPIRE_MINUTES=1440
+      - UPLOAD_DIR=uploads
+      - MAX_UPLOAD_SIZE=524288000
+    volumes:
+      - uploads_data:/app/uploads
+      - logs_data:/app/logs
+    depends_on:
+      - mongodb
+
+  # MongoDB Database (Architecture & Member 6)
+  mongodb:
+    image: mongo:7.0
+    container_name: sma_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=social_media_analyzer
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+  uploads_data:
+  logs_data:

@@ -1,0 +1,215 @@
+{
+  "references": [
+    {
+      "id": "da3952a2-4f3f-40dc-97c8-05ce80a5b035",
+      "title": "Sample Video Baseline",
+      "fingerprints": [
+        {
+          "frame_index": 0,
+          "dhash": "c080008080000000"
+        },
+        {
+          "frame_index": 1,
+          "dhash": "c080008080000000"
+        },
+        {
+          "frame_index": 2,
+          "dhash": "8080008080000000"
+        },
+        {
+          "frame_index": 3,
+          "dhash": "c080008080000000"
+        },
+        {
+          "frame_index": 4,
+          "dhash": "8080008080000000"
+        },
+        {
+          "frame_index": 5,
+          "dhash": "c080008080000000"
+        },
+        {
+          "frame_index": 6,
+          "dhash": "808000c0c0000000"
+        },
+        {
+          "frame_index": 7,
+          "dhash": "808000c0c0000000"
+        },
+        {
+          "frame_index": 8,
+          "dhash": "c08000c0c0000000"
+        },
+        {
+          "frame_index": 9,
+          "dhash": "c08000c0c0000000"
+        },
+        {
+          "frame_index": 10,
+          "dhash": "e08000c0c0000000"
+        },
+        {
+          "frame_index": 11,
+          "dhash": "c08000c0c0000000"
+        },
+        {
+          "frame_index": 12,
+          "dhash": "c08000c0c0000000"
+        },
+        {
+          "frame_index": 13,
+          "dhash": "c080004040000000"
+        },
+        {
+          "frame_index": 14,
+          "dhash": "c080004040000000"
+        },
+        {
+          "frame_index": 15,
+          "dhash": "c080006060000000"
+        },
+        {
+          "frame_index": 16,
+          "dhash": "c080006060000000"
+        },
+        {
+          "frame_index": 17,
+          "dhash": "c080006060000000"
+        },
+        {
+          "frame_index": 18,
+          "dhash": "c080006060000000"
+        },
+        {
+          "frame_index": 19,
+          "dhash": "c080006060000000"
+        },
+        {
+          "frame_index": 20,
+          "dhash": "a080006060000000"
+        },
+        {
+          "frame_index": 21,
+          "dhash": "a080006060000000"
+        },
+        {
+          "frame_index": 22,
+          "dhash": "a080002020000000"
+        },
+        {
+          "frame_index": 23,
+          "dhash": "a080003030000000"
+        },
+        {
+          "frame_index": 24,
+          "dhash": "a080003030000000"
+        },
+        {
+          "frame_index": 25,
+          "dhash": "a080003030000000"
+        },
+        {
+          "frame_index": 26,
+          "dhash": "8080003030000000"
+        },
+        {
+          "frame_index": 27,
+          "dhash": "a080003030000000"
+        },
+        {
+          "frame_index": 28,
+          "dhash": "a080003030000000"
+        },
+        {
+          "frame_index": 29,
+          "dhash": "a080003030000000"
+        },
+        {
+          "frame_index": 30,
+          "dhash": "e080003030000000"
+        },
+        {
+          "frame_index": 31,
+          "dhash": "c080001010000000"
+        },
+        {
+          "frame_index": 32,
+          "dhash": "e080001818000000"
+        },
+        {
+          "frame_index": 33,
+          "dhash": "e080001818000000"
+        },
+        {
+          "frame_index": 34,
+          "dhash": "c080001818000000"
+        },
+        {
+          "frame_index": 35,
+          "dhash": "e080001818000000"
+        },
+        {
+          "frame_index": 36,
+          "dhash": "c080001818000000"
+        },
+        {
+          "frame_index": 37,
+          "dhash": "e080001818000000"
+        },
+        {
+          "frame_index": 38,
+          "dhash": "e080001818000000"
+        },
+        {
+          "frame_index": 39,
+          "dhash": "e080001818000000"
+        },
+        {
+          "frame_index": 40,
+          "dhash": "a080000808000000"
+        },
+        {
+          "frame_index": 41,
+          "dhash": "a080000c0c000000"
+        },
+        {
+          "frame_index": 42,
+          "dhash": "a080000c0c000000"
+        },
+        {
+          "frame_index": 43,
+          "dhash": "a080000c0c000000"
+        },
+        {
+          "frame_index": 44,
+          "dhash": "a080000c0c000000"
+        },
+        {
+          "frame_index": 45,
+          "dhash": "a080000c0c000000"
+        },
+        {
+          "frame_index": 46,
+          "dhash": "8080000c0c000000"
+        },
+        {
+          "frame_index": 47,
+          "dhash": "a080000c0c000000"
+        },
+        {
+          "frame_index": 48,
+          "dhash": "a080000c0c000000"
+        },
+        {
+          "frame_index": 49,
+          "dhash": "a080000404000000"
+        }
+      ],
+      "metadata": {
+        "filename": "sample_test.mp4",
+        "duration": 2.0,
+        "fps": 25.0
+      }
+    }
+  ]
+}

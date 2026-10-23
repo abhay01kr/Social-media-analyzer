@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Profile</title>
+
+    <link rel="stylesheet" href="profileanalyzer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="profile-page">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <a href="dashboard.html" class="back-link"
+                style="text-decoration: none; color: #2563eb; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-family: Arial, sans-serif;">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <a href="home.html#profile-section" class="home-link"
+                style="text-decoration: none; color: #2563eb; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-family: Arial, sans-serif;"
+                title="Return to Home Profile Section">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+        </div>
+
+        <h1>Analyze Social Media Profile</h1>
+
+        <p class="subtitle">
+            Enter the profile URL to detect fake profiles.
+        </p>
+
+        <label for="url">Profile URL</label>
+
+        <input id="url" type="url" placeholder="https://instagram.com/username">
+
+        <h2>Select Platform</h2>
+
+        <div class="platforms">
+
+            <div class="platform">
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram</span>
+            </div>
+
+            <div class="platform">
+                <i class="fa-brands fa-facebook"></i>
+                <span>Facebook</span>
+            </div>
+
+            <div class="platform">
+                <i class="fa-brands fa-x-twitter"></i>
+                <span>X</span>
+            </div>
+
+            <div class="platform">
+                <i class="fa-brands fa-tiktok"></i>
+                <span>TikTok</span>
+            </div>
+
+            <div class="platform">
+                <i class="fa-brands fa-linkedin"></i>
+                <span>LinkedIn</span>
+            </div>
+
+        </div>
+
+        <h2>What We Analyze</h2>
+
+        <ul class="analysis-list">
+            <li><i class="fa-solid fa-check"></i> Profile Consistency</li>
+            <li><i class="fa-solid fa-check"></i> Image Authenticity</li>
+            <li><i class="fa-solid fa-check"></i> Followers Quality</li>
+            <li><i class="fa-solid fa-check"></i> AI Generated Content</li>
+        </ul>
+
+        <button class="analyze-btn" onclick="handleAnalysis()">
+            Analyze Profile
+        </button>
+
+    </div>
+
+    <script>
+        // Handle platform selection
+        const platforms = document.querySelectorAll('.platform');
+        platforms.forEach(platform => {
+            platform.addEventListener('click', () => {
+                platforms.forEach(p => p.classList.remove('selected'));
+                platform.classList.add('selected');
+            });
+        });
+
+        // Validate fields before proceeding to analysis results
+        async function handleAnalysis() {
+            const urlInput = document.getElementById('url');
+            const selectedPlatform = document.querySelector('.platform.selected');
+            const btn = document.querySelector('.analyze-btn');
+
+            if (!urlInput.value.trim()) {
+                urlInput.style.borderColor = '#ef4444';
+                urlInput.placeholder = 'Please enter a valid URL';
+                urlInput.focus();
+                return;
+            }
+
+            urlInput.style.borderColor = '#d1d5db';
+
+            if (!selectedPlatform) {
+                alert('Please select a platform to proceed.');
+                return;
+            }
+
+            const platformName = selectedPlatform.querySelector('span').textContent;
+            const inputVal = urlInput.value.trim();
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing Profile Signals...';
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/profiles/analyze", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        platform: platformName,
+                        username: inputVal
+                    })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    sessionStorage.setItem("profileAnalysisResult", JSON.stringify(result));
+                    sessionStorage.setItem("lastProfileReportId", result.report_id);
+                    window.location.href = `analyze-profile.html?id=${result.report_id}&url=${encodeURIComponent(inputVal)}&platform=${encodeURIComponent(platformName)}`;
+                    return;
+                }
+            } catch (err) {
+                console.warn("Backend unavailable, continuing with client-side analysis:", err);
+            }
+
+            // Fallback
+            sessionStorage.removeItem("profileAnalysisResult");
+            window.location.href = `analyze-profile.html?url=${encodeURIComponent(inputVal)}&platform=${encodeURIComponent(platformName)}`;
+        }
+
+        // Reset input border color when user types
+        document.getElementById('url').addEventListener('input', function() {
+            this.style.borderColor = '#d1d5db';
+        });
+    </script>
+
+</body>
+
+</html>
